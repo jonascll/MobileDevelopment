@@ -60,7 +60,8 @@
             android:layout_marginBottom="80dp"
             android:text="@string/login"
             android:textColor="@android:color/black"
-            android:background="#b0e0e6"/>
+            android:background="#b0e0e6"
+            android:onClick="handleClick"/>
 
 
     </RelativeLayout>
