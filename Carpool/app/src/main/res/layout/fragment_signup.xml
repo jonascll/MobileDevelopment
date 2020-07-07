@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-   
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/CarpoolImage"
             android:layout_width="250dp"
@@ -29,49 +24,36 @@
             android:textSize="40sp"
             android:textColor="#0f52ba" />
         <EditText
-            android:inputType="textEmailAddress"
-            android:id="@+id/EmailInput"
+            android:id="@+id/signUpEmailInput"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_above="@+id/signUpPasswordInput"
             android:layout_marginBottom="10dp"
-            android:layout_above="@+id/PasswordInput"
             android:hint="@string/email"
-            android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:inputType="textEmailAddress"
+            />
         <EditText
-            android:inputType="textPassword"
-            android:id="@+id/PasswordInput"
+            android:id="@+id/signUpPasswordInput"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_above="@+id/signUpButton"
             android:layout_marginBottom="10dp"
-            android:layout_above="@+id/LogInButton"
             android:hint="@string/password"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"/>
+            android:inputType="textPassword"/>
         <Button
-            android:id="@+id/LogInButton"
+            android:id="@+id/signUpButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_above="@+id/SignUpButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:text="@string/login"
-            android:textColor="@android:color/black"
-            android:background="#b0e0e6"
-            android:onClick="handleClickLogIn"/>
-        <Button
-            android:id="@+id/SignUpButton"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="80dp"
             android:text="@string/signup"
             android:textColor="@android:color/black"
-            android:background="@android:color/darker_gray"
-            android:onClick="handleClickSignUp"/>
+            android:background="#b0e0e6"
+            android:onClick="handleClickSignUpFragment"/>
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
