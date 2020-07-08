@@ -32,7 +32,8 @@
             android:layout_marginBottom="10dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            />
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
         <EditText
             android:id="@+id/signUpPasswordInput"
             android:layout_width="300dp"
@@ -41,7 +42,9 @@
             android:layout_above="@+id/signUpButton"
             android:layout_marginBottom="10dp"
             android:hint="@string/password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:gravity="center_horizontal" />
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="300dp"
