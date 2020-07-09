@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -12,12 +13,27 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val currentUser = authenticator.currentUser
+        if(currentUser != null) {
+            val intent = Intent(this, CityPickerActivity::class.java)
+            startActivity(intent)
+        }
         setContentView(R.layout.activity_signup)
     }
 
     fun handleClickSignUpFragment(view: View) {
         val email = findViewById<EditText>(R.id.signUpEmailInput)
         val password = findViewById<EditText>(R.id.signUpPasswordInput)
-        authenticator.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
+        authenticator.createUserWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener(this) {task ->
+            if(task.isSuccessful) {
+                val intent = Intent(this, CityPickerActivity::class.java)
+                startActivity(intent)
+            } else {
+                //TODO make a good error message if inputs arent filled or wrong
+                Toast.makeText(baseContext, "Sign up failed.",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+
         }
     }

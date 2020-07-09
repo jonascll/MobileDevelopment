@@ -11,8 +11,12 @@ import com.google.firebase.auth.FirebaseAuth
 class LogInActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+        val currentUser = authenticator.currentUser
+        if(currentUser != null) {
+            val intent = Intent(this, CityPickerActivity::class.java)
+            startActivity(intent)
+        }
         setContentView(R.layout.activity_login)
 
     }
@@ -26,11 +30,12 @@ class LogInActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-                        Toast.makeText(baseContext, "Authentication success.",
-                            Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, CityPickerActivity::class.java)
+                        startActivity(intent)
 
                     } else {
                         // If sign in fails, display a message to the user.
+                        //TODO make a good error message if inputs arent filled or wrong
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
                     }
