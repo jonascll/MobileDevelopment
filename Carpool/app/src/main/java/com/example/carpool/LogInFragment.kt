@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LogInFragment : Fragment(){
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
