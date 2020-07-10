@@ -10,12 +10,12 @@
         android:layout_height="80dp"
         android:layout_above="@+id/cityPickerFragment"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/enter_city"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textColor="#0f52ba"
-        android:textSize="40sp"/>
+        android:textSize="35sp"/>
     <fragment
         android:layout_width="350dp"
         android:layout_height="70dp"
@@ -23,7 +23,7 @@
         android:name="com.example.carpool.CityPickerFragment"
         android:id="@+id/cityPickerFragment"
         android:layout_above="@+id/continueToMainMenuButton"
-        android:layout_marginBottom="325dp"/>
+        android:layout_marginBottom="375dp"/>
         <Button
             android:id="@+id/continueToMainMenuButton"
             android:layout_width="300dp"

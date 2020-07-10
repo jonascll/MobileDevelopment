@@ -5,6 +5,8 @@
     <string name="carpool">Carpool</string>
     <string name="app_name">Carpool</string>
     <string name="signup">Sign up</string>
-    <string name="enter_city">Geef je stad in</string>
+    <string name="enter_city">Geef je huidige plaats in</string>
     <string name="continue_text">continue</string>
+    <string name="sign_up_as_pooler">geef je op als pooler</string>
+    <string name="find_pooler">vind een pooler in de buurt</string>
 </resources>

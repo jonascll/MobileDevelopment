@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/signupPoolerButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="@string/sign_up_as_pooler"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="210dp"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/findPoolerButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="@string/find_pooler"
+            android:layout_marginTop="110dp"
+            android:layout_below="@+id/signupPoolerButton"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

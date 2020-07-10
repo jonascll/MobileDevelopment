@@ -3,6 +3,7 @@ package com.example.carpool
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -13,6 +14,7 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
+        Log.d("debugging tag" , currentUser.toString())
         if(currentUser != null) {
             val intent = Intent(this, CityPickerActivity::class.java)
             startActivity(intent)

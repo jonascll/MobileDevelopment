@@ -50,7 +50,6 @@ class CityPickerFragment : Fragment() {
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     Log.d("debugging tag", e.message.toString())
-
                 }
 
                 override fun onResponse(call: Call, response: Response) {
