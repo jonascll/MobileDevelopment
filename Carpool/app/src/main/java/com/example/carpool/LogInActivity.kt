@@ -14,11 +14,7 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
-        Log.d("debugging tag" , currentUser.toString())
-        if(currentUser != null) {
-            val intent = Intent(this, CityPickerActivity::class.java)
-            startActivity(intent)
-        }
+        Log.d("debugging tag" , currentUser?.displayName.toString())
         setContentView(R.layout.activity_login)
 
     }

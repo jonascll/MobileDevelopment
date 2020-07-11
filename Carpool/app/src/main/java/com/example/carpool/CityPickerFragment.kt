@@ -24,17 +24,13 @@ import java.io.StringReader
 import java.lang.Exception
 
 class CityPickerFragment : Fragment() {
-    val gemeentes = ArrayList<String>()
     val cities = ArrayList<String>()
-    var doneWithAsyncTask : Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
             setCitiesOnSpinner()
-
-
         return inflater.inflate(R.layout.fragment_citypicker,container,false)
     }
     private fun setCitiesOnSpinner () {

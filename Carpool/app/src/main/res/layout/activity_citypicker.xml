@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent" android:background="#ecf7f9">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +25,8 @@
         android:name="com.example.carpool.CityPickerFragment"
         android:id="@+id/cityPickerFragment"
         android:layout_above="@+id/continueToMainMenuButton"
-        android:layout_marginBottom="375dp"/>
+        android:layout_marginBottom="375dp"
+        tools:layout="@layout/fragment_citypicker" />
         <Button
             android:id="@+id/continueToMainMenuButton"
             android:layout_width="300dp"
@@ -33,6 +36,7 @@
             android:text="@string/continue_text"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="70dp"/>
+            android:layout_marginBottom="70dp"
+            android:onClick="handleClickOfContinueButton"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

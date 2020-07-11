@@ -1,8 +1,9 @@
 package com.example.carpool
 
-import android.app.Activity
-import android.content.Intent
+
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -11,11 +12,12 @@ class MainPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
-        if(currentUser == null) {
-            val intent = Intent(this, LogInActivity::class.java)
-            startActivity(intent)
-        }
+        Log.d("debugging tag", currentUser.toString())
+
         setContentView(R.layout.activity_mainpage)
         //TODO implement button click handlers
     }
+
+    fun handleSignUpPoolerClick(view: View) {}
+    fun handleFindPoolerClick(view: View) {}
 }
