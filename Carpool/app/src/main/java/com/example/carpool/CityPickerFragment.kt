@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -32,6 +33,11 @@ class CityPickerFragment : Fragment() {
     ): View? {
             setCitiesOnSpinner()
         return inflater.inflate(R.layout.fragment_citypicker,container,false)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
     }
     private fun setCitiesOnSpinner () {
 
@@ -92,6 +98,12 @@ class CityPickerFragment : Fragment() {
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         val spinner = view?.findViewById<Spinner>(R.id.cityPicker)
                         spinner?.adapter = adapter
+                        val framgentActivity = activity
+                        if(activity is SignUpAsPoolerActivity) {
+                            Log.d("debugging tag", "entered signup method")
+                            val signUpActivity = activity as SignUpAsPoolerActivity
+                            signUpActivity.setSpinnerValue()
+                        }
                     }
                     mainHandler.post(runnable)
 
@@ -99,5 +111,9 @@ class CityPickerFragment : Fragment() {
             })
     }
 
+    fun getSpinner(): Spinner? {
+        return view?.findViewById<Spinner>(R.id.cityPicker)
+    }
 }
+
 

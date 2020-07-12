@@ -10,6 +10,9 @@
     <string name="sign_up_as_pooler">geef je op als pooler</string>
     <string name="find_pooler">vind een pooler in de buurt</string>
     <string name="sign_up_as_pooler_start_city_text">geef start stad in</string>
-    <string name="sign_up_as_pooler_end_city_text">geef je eindbestemming in (adres en stad)</string>
+    <string name="sign_up_as_pooler_end_city_text">geef je eindbestemming in (stad en adres)</string>
     <string name="sign_up_as_pooler_end_address_input">eind adres</string>
+    <string name="find_pooler_adres">geef je huidige plaats in</string>
+    <string name="find_pooler_adres_input">adres</string>
+    <string name="find_pooler_end_adres_text">geef je bestemming in</string>
 </resources>

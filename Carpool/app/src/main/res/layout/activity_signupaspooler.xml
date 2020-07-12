@@ -19,15 +19,15 @@
             android:textSize="35sp"
             android:textAlignment="center"
             android:gravity="center_horizontal" />
+
         <fragment
             android:id="@+id/cityPickerSignUpPoolerStartCity"
-            android:layout_width="400dp"
+            android:layout_width="405dp"
             android:layout_height="80dp"
-            android:name="com.example.carpool.CityPickerFragment"
-            tools:layout="@layout/fragment_citypicker"
             android:layout_below="@+id/signupPoolerStartCityText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="50dp"
+            tools:layout="@layout/fragment_citypicker" />
         <TextView
             android:id="@+id/signupPoolerEndCityText"
             android:layout_width="400dp"
@@ -51,7 +51,7 @@
             android:layout_below="@+id/signupPoolerEndCityText"/>
         <EditText
             android:layout_width="400dp"
-            android:layout_height="80dp"
+            android:layout_height="40dp"
             android:hint="@string/sign_up_as_pooler_end_address_input"
             android:textAlignment="center"
             android:layout_centerHorizontal="true"
