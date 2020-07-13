@@ -100,8 +100,11 @@ class CityPickerFragment : Fragment() {
                         spinner?.adapter = adapter
                         val framgentActivity = activity
                         if(activity is SignUpAsPoolerActivity) {
-                            Log.d("debugging tag", "entered signup method")
                             val signUpActivity = activity as SignUpAsPoolerActivity
+                            signUpActivity.setSpinnerValue()
+                        }
+                        if(activity is FindPoolerFormActivity) {
+                            val signUpActivity = activity as FindPoolerFormActivity
                             signUpActivity.setSpinnerValue()
                         }
                     }

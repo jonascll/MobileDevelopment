@@ -25,10 +25,12 @@
             android:layout_width="400dp"
             android:layout_height="80dp"
             tools:layout="@layout/fragment_citypicker"
+            android:name="com.example.carpool.CityPickerFragment"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/findPoolerStartCityText"
             android:layout_marginTop="30dp"/>
         <EditText
+            android:inputType="text"
             android:id="@+id/findPoolerStartAdres"
             android:layout_width="400dp"
             android:layout_height="40dp"
@@ -56,19 +58,19 @@
             android:layout_width="400dp"
             android:layout_height="80dp"
             tools:layout="@layout/fragment_citypicker"
+            android:name="com.example.carpool.CityPickerFragment"
             android:layout_below="@+id/findPoolerEndAddressText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
-        <EditText
-            android:id="@+id/findPoolerEndAddress"
-            android:layout_width="400dp"
-            android:layout_height="40dp"
+        <Button
+            android:id="@+id/signupPoolerButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="@string/find_pooler_continue_button"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
-            android:hint="@string/find_pooler_adres_input"
-            android:layout_below="@+id/findPoolerCityPickerEndCity"
-            android:layout_marginTop="50dp"
-            />
+            android:textColor="@android:color/black"
+            android:background="#b0e0e6"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

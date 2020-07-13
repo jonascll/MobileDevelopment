@@ -23,5 +23,9 @@ class MainPageActivity : AppCompatActivity() {
         intent.putExtra("pickedCityId", pickedCityId)
         startActivity(intent)
     }
-    fun handleFindPoolerClick(view: View) {}
+    fun handleFindPoolerClick(view: View) {
+        val intent = Intent(this, FindPoolerFormActivity::class.java)
+        intent.putExtra("pickedCityId", pickedCityId)
+        startActivity(intent)
+    }
 }

@@ -25,6 +25,5 @@ class SignUpAsPoolerActivity : AppCompatActivity() {
         Log.d("debugging tag", spinner.toString())
         spinner?.setSelection(pickedCityId.toInt())
     }
-    //TODO get the previously inputted city to this intent as an extra
 
 }
