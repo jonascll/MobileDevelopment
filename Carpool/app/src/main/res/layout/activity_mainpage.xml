@@ -35,6 +35,6 @@
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:background="#b0e0e6"
-            android:onClick="handleSignUpPoolerClick"/>
+            android:onClick="handleSignUpPoolerClick" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

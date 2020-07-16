@@ -26,5 +26,6 @@
         <activity android:name=".MainPageActivity"/>
         <activity android:name=".SignUpAsPoolerActivity"/>
         <activity android:name=".FindPoolerFormActivity"/>
+        <activity android:name=".FindPoolerActivity"/>
     </application>
 </manifest>

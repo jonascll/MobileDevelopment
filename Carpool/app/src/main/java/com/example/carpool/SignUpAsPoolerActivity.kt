@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -25,7 +26,6 @@ class SignUpAsPoolerActivity : AppCompatActivity() {
         spinner?.setSelection(pickedCityId.toInt())
     }
     fun handleSignUp(view: View) {
-        //TODO : implement check to see if user is already in database and if he isnt searching for a pooler.
         val startFragment = supportFragmentManager.findFragmentById(R.id.cityPickerSignUpPoolerStartCity) as CityPickerFragment
         val startSpinner = startFragment.getSpinner()
         val startCity : String = startSpinner?.selectedItem.toString()
@@ -40,5 +40,7 @@ class SignUpAsPoolerActivity : AppCompatActivity() {
         pooler.startCity = startCity
         pooler.isPooler = true
         myRef.child("Users").child(authenticator.currentUser!!.uid).setValue(pooler)
+        val intent = Intent(this, MainPageActivity::class.java)
+        startActivity(intent)
     }
 }

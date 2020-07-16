@@ -9,4 +9,7 @@ class Pooler {
     var endCity: String = ""
     var destinationAddress = ""
     var startAddress = ""
+
+
+
 }

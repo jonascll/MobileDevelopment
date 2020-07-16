@@ -1,10 +1,13 @@
 package com.example.carpool
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 // TODO : change the looking for pooler boolean in database on click and implement a way to give uid to the pooler you drive with so when the drive is finished the boolean can be set to false again
+// TODO : error messages for inputs if they are incorrect or empty
 class FindPoolerFormActivity : AppCompatActivity() {
         var pickedCityId = 0L
         private val authenticator = FirebaseAuth.getInstance()
@@ -20,4 +23,12 @@ class FindPoolerFormActivity : AppCompatActivity() {
         Log.d("debugging tag", spinner.toString())
         spinner?.setSelection(pickedCityId.toInt())
     }
+
+    fun handleClickFindPoolerFormButton(view: View) {
+        val intent = Intent(this, FindPoolerActivity::class.java)
+        val fragment = supportFragmentManager.findFragmentById(R.id.findPoolerCityPickerEndCity) as CityPickerFragment
+        val spinner = fragment.getSpinner()
+        intent.putExtra("endCity", spinner?.selectedItem.toString())
+        startActivity(intent)
+        }
 }
