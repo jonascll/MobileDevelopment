@@ -26,9 +26,12 @@ class FindPoolerFormActivity : AppCompatActivity() {
 
     fun handleClickFindPoolerFormButton(view: View) {
         val intent = Intent(this, FindPoolerActivity::class.java)
-        val fragment = supportFragmentManager.findFragmentById(R.id.findPoolerCityPickerEndCity) as CityPickerFragment
-        val spinner = fragment.getSpinner()
+        var fragment = supportFragmentManager.findFragmentById(R.id.findPoolerCityPickerEndCity) as CityPickerFragment
+        var spinner = fragment.getSpinner()
         intent.putExtra("endCity", spinner?.selectedItem.toString())
+        fragment = supportFragmentManager.findFragmentById(R.id.cityPickerFindPoolerFragment) as CityPickerFragment
+        spinner = fragment.getSpinner()
+        intent.putExtra("startCity", spinner?.selectedItem.toString())
         startActivity(intent)
         }
 }

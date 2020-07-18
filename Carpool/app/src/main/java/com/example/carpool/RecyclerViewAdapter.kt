@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerViewAdapter(val poolersFromSameCity: ArrayList<Pooler>?) : RecyclerView.Adapter<PoolerViewHolder>() {
+class RecyclerViewAdapter(val poolersFromSameCity: ArrayList<Pooler>?, val poolerUidList: ArrayList<String>?) : RecyclerView.Adapter<PoolerViewHolder>() {
 //TODO fix white screen (used resource to figure out recycler view https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465)
 
 
@@ -22,7 +22,10 @@ class RecyclerViewAdapter(val poolersFromSameCity: ArrayList<Pooler>?) : Recycle
 
     override fun onBindViewHolder(holder: PoolerViewHolder, position: Int) {
         val pooler : Pooler = poolersFromSameCity?.get(position) ?: Pooler()
-        holder.bind(pooler)
+        val uid : String? = poolerUidList?.get(position)
+        if (uid != null) {
+            holder.bind(pooler, uid)
+        }
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

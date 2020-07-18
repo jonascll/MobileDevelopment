@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-
+//TODO : fix slow button hiding if you are already signed up as a pooler
 class MainPageActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
     private val databaseReference = FirebaseDatabase.getInstance().reference

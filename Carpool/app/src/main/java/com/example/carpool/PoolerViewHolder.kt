@@ -11,14 +11,20 @@ class PoolerViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerVi
 
     var startAddress : TextView? = null
     var endCity : TextView? = null
+    var endAddress : TextView? = null
+    var uid : TextView? = null
 
     init {
         startAddress = itemView.findViewById(R.id.person_startAddress)
-        endCity = itemView.findViewById(R.id.person_endAddress)
+        endCity = itemView.findViewById(R.id.person_endCity)
+        endAddress = itemView.findViewById(R.id.person_endAddress)
+        uid = itemView.findViewById(R.id.hidden_uid)
     }
-    fun bind(pooler: Pooler) {
-        startAddress?.text = pooler.startAddress
-        endCity?.text = pooler.endCity
+    fun bind(pooler: Pooler, poolerUid: String) {
+        startAddress?.text = String.format(itemView.resources.getString(R.string.find_pooler_pooler_start_city_text), pooler.startCity)
+        endCity?.text = String.format(itemView.resources.getString(R.string.find_pooler_pooler_end_city_text), pooler.endCity)
+        endAddress?.text = String.format(itemView.resources.getString(R.string.find_pooler_pooler_end_address_text), pooler.destinationAddress)
+        uid?.text = poolerUid
     }
 
 }

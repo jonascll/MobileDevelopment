@@ -15,4 +15,8 @@
     <string name="find_pooler_adres">geef je huidige plaats in</string>
     <string name="find_pooler_adres_input">adres</string>
     <string name="find_pooler_end_adres_text">geef je bestemming in</string>
+    <string name="find_pooler_pooler_end_city_text">stad bestemming van pooler : %1$s</string>
+    <string name="find_pooler_pooler_end_address_text">bestemming van pooler : %1$s</string>
+    <string name="find_pooler_pooler_start_city_text">start stad van pooler : %1$s</string>
+    <string name="find_pooler_list_top_text">klik op de pooler die je wilt</string>
 </resources>
