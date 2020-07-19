@@ -12,9 +12,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_recyclerview.*
+import kotlinx.android.synthetic.main.fragment_poolerrecyclerview.*
 
-class RecyclerViewFragment : Fragment() {
+class PoolerRecyclerViewFragment : Fragment() {
     val auth = FirebaseAuth.getInstance()
     var endCity : String? = null
     var startCity : String? = null
@@ -27,7 +27,7 @@ class RecyclerViewFragment : Fragment() {
     ): View? {
         endCity = activity?.intent?.getStringExtra("endCity")
         startCity = activity?.intent?.getStringExtra("startCity")
-        return inflater.inflate(R.layout.fragment_recyclerview,container,false)
+        return inflater.inflate(R.layout.fragment_poolerrecyclerview,container,false)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class RecyclerViewFragment : Fragment() {
             if (it) {
                 recyclerViewInFindPooler.apply {
                     layoutManager = LinearLayoutManager(activity)
-                    adapter = RecyclerViewAdapter(poolerFromSameCity, poolerFoundUid)
+                    adapter = PoolerRecyclerViewAdapter(poolerFromSameCity, poolerFoundUid)
                 }
             }
 
@@ -50,7 +50,7 @@ class RecyclerViewFragment : Fragment() {
 
     }
     companion object {
-        fun newInstance(): RecyclerViewFragment = RecyclerViewFragment()
+        fun newInstance(): PoolerRecyclerViewFragment = PoolerRecyclerViewFragment()
     }
     private fun getAllPoolersFromSameCity(completion : (Boolean) -> Unit) {
         val dbRef = FirebaseDatabase.getInstance().reference

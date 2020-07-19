@@ -19,7 +19,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="@string/find_pooler"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="25dp"
             android:layout_above="@+id/signupPoolerButton"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
@@ -29,12 +29,23 @@
             android:id="@+id/signupPoolerButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="25dp"
             android:text="@string/sign_up_as_pooler"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
+            android:layout_above="@+id/seeRequests"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:background="#b0e0e6"
             android:onClick="handleSignUpPoolerClick" />
+        <Button
+            android:id="@+id/seeRequests"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="@string/see_requests_text"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:background="#b0e0e6"
+            android:onClick="handleSeeRequests" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

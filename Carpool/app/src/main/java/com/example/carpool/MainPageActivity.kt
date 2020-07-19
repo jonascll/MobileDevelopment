@@ -19,10 +19,8 @@ class MainPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
         pickedCityId = intent.getLongExtra("pickedCityId", 0)
-        checkIfCurrentUserIsPooler()
-
+        checkIfCurrentUserIsPoolerOrLookingForPooler()
         setContentView(R.layout.activity_mainpage)
-
     }
 
     fun handleSignUpPoolerClick(view: View) {
@@ -37,21 +35,43 @@ class MainPageActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun checkIfCurrentUserIsPooler() {
+    fun checkIfCurrentUserIsPoolerOrLookingForPooler() {
         databaseReference.child("Users").child(authenticator.currentUser!!.uid).child("pooler")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val isPooler: Boolean? = snapshot.getValue(Boolean::class.java)
                     if (isPooler!!) {
-                        val button: Button = findViewById<Button>(R.id.signupPoolerButton)
-                        button.visibility = View.INVISIBLE
+                        val buttonPooler: Button = findViewById<Button>(R.id.signupPoolerButton)
+                        buttonPooler.visibility = View.INVISIBLE
+                        val buttonFind: Button = findViewById(R.id.findPoolerButton)
+                        buttonFind.visibility = View.INVISIBLE
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
                     Log.d("debugging tag", error.message)
+
                 }
             })
+        databaseReference.child("Users").child(authenticator.currentUser!!.uid).child("searchingForPooler")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val isLookingForPooler = snapshot.getValue(Boolean::class.java)
+                    if(isLookingForPooler!!) {
+                        val buttonPooler: Button = findViewById<Button>(R.id.signupPoolerButton)
+                        buttonPooler.visibility = View.INVISIBLE
+                        val buttonFind: Button = findViewById(R.id.findPoolerButton)
+                        buttonFind.visibility = View.INVISIBLE
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    //TODO implement
+                }
+            })
+
+    }
+
+    fun handleSeeRequests(view: View) {
 
     }
 

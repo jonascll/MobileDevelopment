@@ -19,8 +19,8 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_recyclerview"
-        android:name="com.example.carpool.RecyclerViewFragment"
+        tools:layout="@layout/fragment_poolerrecyclerview"
+        android:name="com.example.carpool.PoolerRecyclerViewFragment"
         android:id="@+id/recyclerViewFragment"
         android:layout_below="@+id/findPoolerTopText"/>
     </RelativeLayout>
