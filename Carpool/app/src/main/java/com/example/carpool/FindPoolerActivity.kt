@@ -14,12 +14,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.*
 
 class FindPoolerActivity : AppCompatActivity() {
     val currentUser = FirebaseAuth.getInstance().currentUser
     val dbReference = FirebaseDatabase.getInstance().reference
     var pooler : Pooler? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO instead of instanty accepting a pooler by clicking on him make it go to a detail page
         //TODO make it so you cant see yourself by  hiding the pooler button and maybe showing another button that goes to a accept requests activity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_findpooler)
@@ -64,7 +66,8 @@ class FindPoolerActivity : AppCompatActivity() {
         driveRequest.destination = destination.toString()
         driveRequest.endCity = endCity.toString()
         driveRequest.startAddress = startAddres.toString()
-        getChosenPooler(uidText.toString()){ completed ->
+        driveRequest.poolerUid = uidText.toString()
+        getChosenPooler(UUID.randomUUID().toString()){ completed ->
             if(completed) {
                 pooler?.isSearchingForPooler = true
                 dbReference.child("RequestedDrives").child(uidText.toString()).setValue(driveRequest)

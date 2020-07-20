@@ -4,7 +4,8 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background_border">
         <TextView
             android:id="@+id/request_start_address"
             android:layout_width="wrap_content"

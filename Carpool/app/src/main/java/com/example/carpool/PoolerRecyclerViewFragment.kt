@@ -46,7 +46,6 @@ class PoolerRecyclerViewFragment : Fragment() {
 
 
         }
-        Log.d("debugging tag created", poolerFromSameCity.toString())
 
     }
     companion object {
