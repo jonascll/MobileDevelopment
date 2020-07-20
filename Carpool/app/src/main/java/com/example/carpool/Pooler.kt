@@ -1,5 +1,7 @@
 package com.example.carpool
 
+import java.io.Serializable
+
 class Pooler {
 
     var isPooler: Boolean = false

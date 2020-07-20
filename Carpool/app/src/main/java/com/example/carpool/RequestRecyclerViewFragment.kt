@@ -52,11 +52,14 @@ class RequestRecyclerViewFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     val request : RequestedDrive? = it.getValue(RequestedDrive::class.java)
-                    if(it.key.toString() == uid){
+
                         if (request != null) {
-                            listOfRequest.add(request)
+                            if(request.poolerUid == uid) {
+                                listOfRequest.add(request)
+                            }
+
                         }
-                    }
+
                 }
                 completion(true)
             }

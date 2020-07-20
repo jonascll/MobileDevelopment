@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 // TODO : change the looking for pooler boolean in database on click and implement a way to give uid to the pooler you drive with so when the drive is finished the boolean can be set to false again
@@ -28,7 +29,10 @@ class FindPoolerFormActivity : AppCompatActivity() {
         val intent = Intent(this, FindPoolerActivity::class.java)
         var fragment = supportFragmentManager.findFragmentById(R.id.findPoolerCityPickerEndCity) as CityPickerFragment
         var spinner = fragment.getSpinner()
+        val endAddressfield = findViewById<EditText>(R.id.findPoolerEndAdres)
+        val endAddress = endAddressfield.text.toString()
         intent.putExtra("endCity", spinner?.selectedItem.toString())
+        intent.putExtra("endAddress", endAddress)
         fragment = supportFragmentManager.findFragmentById(R.id.cityPickerFindPoolerFragment) as CityPickerFragment
         spinner = fragment.getSpinner()
         intent.putExtra("startCity", spinner?.selectedItem.toString())

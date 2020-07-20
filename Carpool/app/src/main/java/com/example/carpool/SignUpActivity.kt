@@ -16,10 +16,6 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
-        if(currentUser != null) {
-            val intent = Intent(this, CityPickerActivity::class.java)
-            startActivity(intent)
-        }
         setContentView(R.layout.activity_signup)
 
 
