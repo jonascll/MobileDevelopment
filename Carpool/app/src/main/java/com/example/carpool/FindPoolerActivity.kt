@@ -21,12 +21,19 @@ class FindPoolerActivity : AppCompatActivity() {
     val dbReference = FirebaseDatabase.getInstance().reference
     var pooler : Pooler? = null
     var endAddress : String? = null
+    var startAddress : String? = null
+    var startCity : String? = null
+    var endCity : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO instead of instanty accepting a pooler by clicking on him make it go to a detail page
         //TODO make it so you cant see yourself by  hiding the pooler button and maybe showing another button that goes to a accept requests activity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_findpooler)
         endAddress = intent.getStringExtra("endAddress")
+        endCity = intent.getStringExtra("endCity")
+        startCity = intent.getStringExtra("startCity")
+        startAddress = intent.getStringExtra("startAddress")
+
     }
 
     fun getChosenPooler(uidText : String, completion : (Boolean) -> Unit) {
@@ -36,6 +43,7 @@ class FindPoolerActivity : AppCompatActivity() {
                 snapshot.children.forEach{
                     if(it.key == uidText) {
                         pooler = it.getValue(Pooler::class.java)
+
                     }
 
                 }
@@ -56,12 +64,17 @@ class FindPoolerActivity : AppCompatActivity() {
         getChosenPooler(uidText.toString()){
             if(it) {
                 val intent = Intent(this, DetailPoolerActivity::class.java)
-                intent.putExtra("startCity",pooler?.startCity)
-                intent.putExtra("startAddress",pooler?.startAddress)
-                intent.putExtra("endCity",pooler?.endCity)
-                intent.putExtra("isPooler",pooler?.isPooler)
-                intent.putExtra("endAddress", endAddress)
-                intent.putExtra("uid", uidText.toString())
+                intent.putExtra("endAddress", endAddress.toString())
+                intent.putExtra("endAddressPooler", pooler?.destinationAddress)
+                intent.putExtra("startAddress", startAddress.toString())
+                intent.putExtra("startAddressPooler", pooler?.startAddress)
+                intent.putExtra("endCity", endCity.toString())
+                intent.putExtra("endCityPooler", pooler?.endCity)
+                intent.putExtra("startCity", startCity.toString())
+                intent.putExtra("startCityPooler", pooler?.startCity)
+                intent.putExtra("isPooler", pooler?.isPooler)
+                intent.putExtra("uidPooler", uidText.toString())
+                intent.putExtra("uid", currentUser?.uid.toString())
                 startActivity(intent)
             }
         }

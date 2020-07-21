@@ -2,6 +2,7 @@ package com.example.carpool
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,72 +12,135 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_detailpooler.*
 import java.util.*
 
 class DetailPoolerActivity : AppCompatActivity() {
+    var startCityPooler: String? = null
+    var startAddressPooler: String? = null
+    var endCityPooler: String? = null
+    var destinationPooler: String? = null
+    var isPooler: Boolean? = null
     var startCity: String? = null
-    var startAddress : String? = null
-    var endCity : String? = null
-    var destination : String? = null
-    var isPooler : Boolean? = null
-    var uid : String? = null
+    var startAddress: String? = null
+    var endCity: String? = null
+    var destination: String? = null
+    var uid: String? = null
+    var uidPooler: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_detailpooler)
+        startCityPooler = intent.getStringExtra("startCityPooler")
+        startAddressPooler = intent.getStringExtra("startAddressPooler")
+        endCityPooler = intent.getStringExtra("endCityPooler")
+        destinationPooler = intent.getStringExtra("endAddressPooler")
+        uidPooler = intent.getStringExtra("uidPooler")
+        isPooler = intent.getBooleanExtra("isPooler", true)
         startCity = intent.getStringExtra("startCity")
         startAddress = intent.getStringExtra("startAddress")
         endCity = intent.getStringExtra("endCity")
         destination = intent.getStringExtra("endAddress")
-        isPooler = intent.getBooleanExtra("isPooler", true)
         uid = intent.getStringExtra("uid")
         setValues()
     }
 
 
-
     fun setValues() {
-        val uidField : TextView = findViewById(R.id.detailUid)
+        val uidField: TextView = findViewById(R.id.detailUid)
         uidField.text = uid
-        val detailStartCityField : TextView = findViewById(R.id.detailStartCity)
-        detailStartCityField.text = startCity
-        val detailStartAddressField : TextView = findViewById(R.id.detailStartAddress)
-        detailStartAddressField.text = startAddress
-        val detailEndCityField : TextView = findViewById(R.id.detailDestinationCity)
-        detailEndCityField.text = endCity
-        val detailEndDestinationField : TextView = findViewById(R.id.detailDestination)
-        detailEndDestinationField.text = destination
-        val detailIsPoolerField : TextView = findViewById(R.id.detailIsPooler)
+        val detailStartCityField: TextView = findViewById(R.id.detailStartCity)
+        detailStartCityField.text = startCityPooler
+        val detailStartAddressField: TextView = findViewById(R.id.detailStartAddress)
+        detailStartAddressField.text = startAddressPooler
+        val detailEndCityField: TextView = findViewById(R.id.detailDestinationCity)
+        detailEndCityField.text = endCityPooler
+        val detailEndDestinationField: TextView = findViewById(R.id.detailDestination)
+        detailEndDestinationField.text = destinationPooler
+        val detailIsPoolerField: TextView = findViewById(R.id.detailIsPooler)
+        detailIsPoolerField.text = isPooler.toString()
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}
     fun handleOnAcceptPoolerClick(view: View) {
 
         val driveRequest = RequestedDrive()
-        if (startAddress != null && endCity != null && destination != null) {
-            driveRequest.startAddress = startCity.toString()
+        if (startAddress != null && endCity != null && destination != null && startCity != null) {
+            driveRequest.startCity = startCity.toString()
             driveRequest.endCity = endCity.toString()
             driveRequest.destination = destination.toString()
+            driveRequest.startAddress = startAddress.toString()
+            driveRequest.email = FirebaseAuth.getInstance().currentUser?.email.toString()
         }
         if (uid != null) {
-            driveRequest.poolerUid = uid.toString()
+            driveRequest.poolerUid = uidPooler.toString()
+            driveRequest.requesterUid = uid.toString()
         }
-        val poolerObject : Pooler = Pooler()
-        poolerObject.isPooler = isPooler as Boolean
+        val poolerObject: Pooler = Pooler()
         poolerObject.startCity = startCity.toString()
         poolerObject.startAddress = startAddress.toString()
         poolerObject.endCity = endCity.toString()
         poolerObject.destinationAddress = destination.toString()
-        //TODO : add check to see if request already exists
+        poolerObject.isSearchingForPooler = true
         val ref = FirebaseDatabase.getInstance().reference
         ref.child("Users").child(uid.toString()).setValue(poolerObject)
+        checkIfRequestHasAlreadyBeenMade(driveRequest) { alreadyExists ->
+            Log.d("debugging tag", alreadyExists.toString())
+            if (!alreadyExists) {
+                ref.child("RequestedDrives").child(UUID.randomUUID().toString())
+                    .setValue(driveRequest)
+                    .addOnCompleteListener(
+                        OnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                intent = Intent(this, MainPageActivity::class.java)
+                                startActivity(intent)
+                            }
+                            //TODO : write code if it fails
+                        })
+            } else {
+                intent = Intent(this, MainPageActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 
-        ref.child("RequestedDrives").child(UUID.randomUUID().toString()).setValue(driveRequest).addOnCompleteListener(
-            OnCompleteListener {
-                if(it.isSuccessful) {
-                    intent = Intent(this, MainPageActivity::class.java)
-                    startActivity(intent)
+
+    fun checkIfRequestHasAlreadyBeenMade(
+        request: RequestedDrive,
+        alreadyExists: (Boolean) -> Unit
+    ) {
+        val ref = FirebaseDatabase.getInstance().reference
+        var exists = false
+        ref.child("RequestedDrives").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach{dataKey ->
+                   for(data in dataKey.children){
+                       if(data.key == "poolerUid") {
+                           Log.d("debugging tag", data.toString())
+                               if(!exists && data.value == request.poolerUid) {
+                                   exists = true
+                               }
+                           }
+                    }
                 }
-            })
+                if(!exists) {
+                    alreadyExists(false)
+                }
+                if(exists) {
+                    alreadyExists(true)
+                }
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                //TODO implement
+
+            }
+            }
+
+          )
+        Log.d("debugging tag", exists.toString())
+
+
     }
 }
+

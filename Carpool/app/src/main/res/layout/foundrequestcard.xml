@@ -7,13 +7,31 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_border">
         <TextView
-            android:id="@+id/request_start_address"
+            android:id="@+id/request_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:layout_alignParentTop="true"/>
+
+        <TextView
+            android:id="@+id/request_start_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/request_email"/>
+        <TextView
+            android:id="@+id/request_start_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/request_start_city"/>
+
         <TextView
             android:id="@+id/request_end_city"
             android:layout_width="wrap_content"
@@ -30,6 +48,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:layout_below="@+id/request_end_city"/>
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
