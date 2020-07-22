@@ -29,5 +29,6 @@
         <activity android:name=".FindPoolerActivity"/>
         <activity android:name=".ShowRequestedDrivesActivity"/>
         <activity android:name=".DetailPoolerActivity"/>
+        <activity android:name=".RequestedDriveDetailActivity"/>
     </application>
 </manifest>
