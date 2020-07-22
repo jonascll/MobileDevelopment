@@ -7,6 +7,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/logOutButtonCityPicker"
+            android:name="com.example.carpool.LogOutButtonFragment"
+            tools:layout="@layout/fragment_logoutbutton"/>
     <TextView
         android:layout_width="400dp"
         android:layout_height="80dp"

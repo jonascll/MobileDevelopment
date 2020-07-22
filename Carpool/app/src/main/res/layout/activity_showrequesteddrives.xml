@@ -10,8 +10,28 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/logOutButtonCityPicker"
+            android:name="com.example.carpool.LogOutButtonFragment"
+            tools:layout="@layout/fragment_logoutbutton"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="315dp"
+            android:layout_marginStart="315dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:text="@string/choose_request_text"
+            android:textSize="30sp"
+            android:textColor="#0f52ba"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:id="@+id/findRequestTopText"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             tools:layout="@layout/fragment_requesteddriverecyclerview"
             android:name="com.example.carpool.RequestRecyclerViewFragment"
-            android:id="@+id/requested_drive_recyclerview_fragment"/>
+            android:id="@+id/requested_drive_recyclerview_fragment"
+            android:layout_below="@+id/findRequestTopText"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

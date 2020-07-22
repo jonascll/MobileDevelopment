@@ -21,7 +21,7 @@ class RequestViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
     }
 
     fun bind (request : RequestedDrive) {
-        startAddress?.text = request.startCity
+        startAddress?.text = request.startAddress
         endCity?.text = request.endCity
         destination?.text = request.destination
         startCity?.text = request.startCity

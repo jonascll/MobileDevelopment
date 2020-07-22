@@ -11,6 +11,12 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/logOutButtonCityPicker"
+            android:name="com.example.carpool.LogOutButtonFragment"
+            tools:layout="@layout/fragment_logoutbutton"/>
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/carpoolTitleMainPage"
             android:name="com.example.carpool.CarpoolTitleFragment"
             tools:layout="@layout/fragment_carpooltitle" />

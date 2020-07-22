@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#ecf7f9">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/logOutButtonCityPicker"
+            android:name="com.example.carpool.LogOutButtonFragment"
+            tools:layout="@layout/fragment_logoutbutton"
+            android:layout_marginLeft="315dp"
+            android:layout_marginStart="315dp" />
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -87,16 +96,18 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="230dp"
             android:src="@drawable/check"
-            android:onClick="handleOnAcceptPoolerClick"/>
+            android:onClick="handleOnAcceptPoolerClick"
+            android:layout_marginStart="230dp" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="130dp"
             android:src="@drawable/close"
-            android:onClick="handleOnDeclinePoolerClick"/>
+            android:onClick="handleOnDeclinePoolerClick"
+            android:layout_marginStart="130dp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

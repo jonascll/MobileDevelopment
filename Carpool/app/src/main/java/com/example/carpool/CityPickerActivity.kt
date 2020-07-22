@@ -24,7 +24,9 @@ class CityPickerActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    override fun onBackPressed() {
 
+    }
 
 
 }

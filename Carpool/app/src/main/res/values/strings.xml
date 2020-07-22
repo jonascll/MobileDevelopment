@@ -20,4 +20,5 @@
     <string name="find_pooler_pooler_start_city_text">start stad van pooler : %1$s</string>
     <string name="find_pooler_list_top_text">klik op de pooler die je wilt</string>
     <string name="see_requests_text">zie verzoeken om te poolen</string>
+    <string name="choose_request_text">klik op verzoek dat je wilt bekijken</string>
 </resources>

@@ -43,6 +43,8 @@ class DetailPoolerActivity : AppCompatActivity() {
         destination = intent.getStringExtra("endAddress")
         uid = intent.getStringExtra("uid")
         setValues()
+
+
     }
 
 

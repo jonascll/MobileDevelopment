@@ -32,7 +32,6 @@ class LogInActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        // If sign in fails, display a message to the user.
                         //TODO make a good error message if inputs arent filled or wrong
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
@@ -44,6 +43,9 @@ class LogInActivity : AppCompatActivity() {
     fun handleClickSignUp(view: View) {
         val intent = Intent(this,SignUpActivity::class.java)
         startActivity(intent)
+
+    }
+    override fun onBackPressed() {
 
     }
 }
