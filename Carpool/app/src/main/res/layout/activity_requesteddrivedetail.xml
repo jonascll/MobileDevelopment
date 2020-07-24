@@ -8,30 +8,75 @@
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/emailRequestedDriveDetail"/>
+        android:id="@+id/emailRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/requesterUidRequestedDriveDetail"/>
+            android:id="@+id/requesterUidRequestedDriveDetail"
+            android:layout_below="@+id/emailRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/poolerUidRequestedDriveDetail"/>
+            android:id="@+id/poolerUidRequestedDriveDetail"
+            android:layout_below="@+id/requesterUidRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/startCityRequestedDriveDetail"/>
+            android:id="@+id/startCityRequestedDriveDetail"
+            android:layout_below="@+id/poolerUidRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/startAddressRequestedDriveDetail"/>
+            android:id="@+id/startAddressRequestedDriveDetail"
+            android:layout_below="@+id/startCityRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/endCityRequestedDriveDetail"/>
+            android:id="@+id/endCityRequestedDriveDetail"
+            android:layout_below="@+id/startAddressRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/endAddressRequestedDriveDetail"/>
+            android:id="@+id/endAddressRequestedDriveDetail"
+            android:layout_below="@+id/endCityRequestedDriveDetail"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="230dp"
+            android:src="@drawable/check"
+            android:onClick="handleOnAcceptRequestClick"
+            android:layout_marginStart="230dp" />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="130dp"
+            android:src="@drawable/close"
+            android:onClick="handleOnDeclineRequestClick"
+            android:layout_marginStart="130dp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
