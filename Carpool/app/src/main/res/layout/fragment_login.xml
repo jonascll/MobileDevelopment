@@ -49,13 +49,24 @@
             android:id="@+id/SignUpButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@+id/seeRequestsOfflineButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/signup"
             android:textColor="@android:color/black"
             android:background="@android:color/darker_gray"
             android:onClick="handleClickSignUp"/>
+            <Button
+            android:id="@+id/seeRequestsOfflineButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:text="@string/see_requests_offline"
+            android:textColor="@android:color/black"
+            android:background="#b0e0e6"
+            android:onClick="handleClickSeeOfflineRequests"/>
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

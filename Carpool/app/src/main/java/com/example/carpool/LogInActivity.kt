@@ -1,13 +1,16 @@
 package com.example.carpool
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import java.net.InetAddress
+
 
 class LogInActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
@@ -16,6 +19,7 @@ class LogInActivity : AppCompatActivity() {
         val currentUser = authenticator.currentUser
         Log.d("debugging tag" , currentUser?.displayName.toString())
         setContentView(R.layout.activity_login)
+
 
     }
     fun handleClickLogIn(view: View) {
@@ -45,7 +49,13 @@ class LogInActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
+    fun handleClickSeeOfflineRequests(view: View) {
+
+    }
     override fun onBackPressed() {
 
     }
+
+
 }

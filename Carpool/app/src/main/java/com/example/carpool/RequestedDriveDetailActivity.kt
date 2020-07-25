@@ -2,6 +2,7 @@ package com.example.carpool
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +16,12 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
     var destination : String? = null
     var poolerUid : String? = null
     var requesterUid : String? = null
+    var deviceId : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO : style layout correctly
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requesteddrivedetail)
+        deviceId = Settings.Secure.ANDROID_ID
         email = intent.getStringExtra("email")
         startCity = intent.getStringExtra("startCity")
         startAddress = intent.getStringExtra("startAddress")
@@ -48,7 +51,8 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
             applicationContext,
             AppDatabase::class.java, "acceptedDrives"
         ).build()
-        val acceptedDriveEntity = AcceptedDriveEntity(0,email.toString(),requesterUid.toString(),poolerUid.toString()
+        val acceptedDriveEntity = AcceptedDriveEntity(0,
+            deviceId.toString(),email.toString(),requesterUid.toString(),poolerUid.toString()
             ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
         db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
         val intent = Intent(this, MainPageActivity::class.java)
