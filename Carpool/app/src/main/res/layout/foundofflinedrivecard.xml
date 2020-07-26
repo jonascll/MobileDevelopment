@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hidden_pooler_uid"
+            android:visibility="gone"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailOfflineDrive"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startCityOfflineDrive"
+            android:layout_below="@+id/emailOfflineDrive"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startAddressOfflineDrive"
+            android:layout_below="@+id/startCityOfflineDrive"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/endCityOfflineDrive"
+            android:layout_below="@+id/startAddressOfflineDrive"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/destinationOfflineDrive"
+            android:layout_below="@+id/endCityOfflineDrive"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

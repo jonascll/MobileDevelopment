@@ -7,13 +7,13 @@ import androidx.room.Query
 @Dao
 interface AcceptedDriveDao {
     @Query("SELECT * FROM acceptedDrives")
-    fun getAll(): List<AcceptedDriveEntity>
+    fun getAll(): ArrayList<AcceptedDriveEntity>
 
     @Query("SELECT * FROM acceptedDrives WHERE pooler_uid IN (:poolerUids)")
-    fun loadAllByPoolerUids(poolerUids: List<String>): List<AcceptedDriveEntity>
+    fun loadAllByPoolerUids(poolerUids: List<String>): ArrayList<AcceptedDriveEntity>
 
-    @Query("SELECT * FROM acceptedDrives WHERE email Like (:email)")
-    fun findByEmail(email: String): AcceptedDriveEntity
+    @Query("SELECT * FROM acceptedDrives WHERE device_id Like (:deviceId)")
+    fun findByDeviceId(deviceId: String): ArrayList<AcceptedDriveEntity>
 
     @Delete
     fun delete(acceptedDriveEntity: AcceptedDriveEntity)
