@@ -51,7 +51,8 @@ class LogInActivity : AppCompatActivity() {
     }
 
     fun handleClickSeeOfflineRequests(view: View) {
-
+        val intent = Intent(this, SeeOfflineAcceptedDrivesActivity::class.java)
+        startActivity(intent)
     }
     override fun onBackPressed() {
 

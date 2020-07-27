@@ -20,13 +20,18 @@ import kotlinx.android.synthetic.main.fragment_offlineacceptdrivesrecyclerview.*
 import java.lang.Exception
 
 class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
-    var acceptedDrives : ArrayList<AcceptedDriveEntity>? = null
+    var acceptedDrives : List<AcceptedDriveEntity>? = null
     var deviceId : String? = null
+    private var db = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Room.databaseBuilder(
+            activity!!.applicationContext,
+            AppDatabase::class.java, "acceptedDrives"
+        ).build()
         return inflater.inflate(R.layout.fragment_offlineacceptdrivesrecyclerview,container,false)
     }
 
@@ -65,9 +70,9 @@ class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
                     deviceId = pooler?.deviceId
                     val db = Room.databaseBuilder(
                         activity!!.applicationContext,
-                        AppDatabase::class.java, "acceptedDrives"
+                        AppDatabase::class.java, "acceptedDrivesDb"
                     ).build()
-                    acceptedDrives = db.acceptedDriveDao().findByDeviceId(deviceId.toString())
+                    acceptedDrives = db.acceptedDriveDao().findByDeviceId(deviceId.toString()).value
                     completion(true)
                 }
 

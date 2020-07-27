@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class OfflineAcceptedDriveViewAdapter (val acceptedDrives : ArrayList<AcceptedDriveEntity>) : RecyclerView.Adapter<OfflineAcceptedDriveViewHolder>() {
+class OfflineAcceptedDriveViewAdapter (val acceptedDrives : List<AcceptedDriveEntity>) : RecyclerView.Adapter<OfflineAcceptedDriveViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
