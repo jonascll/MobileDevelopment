@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class RequestedDriveDetailActivity : AppCompatActivity(){
     var email : String? = null
@@ -17,14 +19,14 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
     var destination : String? = null
     var poolerUid : String? = null
     var requesterUid : String? = null
-    var deviceId : String? = null
-    @SuppressLint("HardwareIds")
+    val executorService : ExecutorService = Executors.newFixedThreadPool(1)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO : style layout correctly
         //TODO Way of getting device id is wrong FIX
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requesteddrivedetail)
-        deviceId =  Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+
         email = intent.getStringExtra("email")
         startCity = intent.getStringExtra("startCity")
         startAddress = intent.getStringExtra("startAddress")
@@ -50,17 +52,25 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
 
     fun handleOnDeclineRequestClick(view: View) {}
     fun handleOnAcceptRequestClick(view: View) {
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "acceptedDrivesDb"
-        ).build()
-        val acceptedDriveEntity = AcceptedDriveEntity(0,
-            deviceId.toString(),email.toString(),requesterUid.toString(),poolerUid.toString()
-            ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
-        db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
+        //TODO : also put it in the firebase database just so when you log in you can see them for your account only (since if someone else logs in on your device it wont work)
+        val runnable : Runnable = Runnable {
+            putNewAcceptedDrive()
+        }
+        executorService.submit(runnable)
         val intent = Intent(this, MainPageActivity::class.java)
         startActivity(intent)
 
 
+    }
+
+    fun putNewAcceptedDrive() {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "acceptedDrivesDb"
+        ).fallbackToDestructiveMigration().build()
+        val acceptedDriveEntity = AcceptedDriveEntity(0,
+            email.toString(),requesterUid.toString(),poolerUid.toString()
+            ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
+        db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
     }
 }

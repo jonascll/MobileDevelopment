@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,6 +25,7 @@ class OfflineAcceptedDriveViewHolder(inflater: LayoutInflater, parent: ViewGroup
 
 
     fun bind(acceptedDrive : AcceptedDriveEntity) {
+        Log.d("inbinder", acceptedDrive.toString())
         startAddress?.text = acceptedDrive.startAddress
         startCity?.text = acceptedDrive.startCity
         endCity?.text = acceptedDrive.endCity

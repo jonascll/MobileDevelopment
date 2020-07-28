@@ -41,7 +41,6 @@ class SignUpAsPoolerActivity : AppCompatActivity() {
         pooler.endCity = endCity
         pooler.startCity = startCity
         pooler.isPooler = true
-        pooler.deviceId = Settings.Secure.ANDROID_ID
         myRef.child("Users").child(authenticator.currentUser!!.uid).setValue(pooler)
         val intent = Intent(this, MainPageActivity::class.java)
         startActivity(intent)

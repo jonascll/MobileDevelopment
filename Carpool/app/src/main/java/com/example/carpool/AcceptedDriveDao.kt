@@ -11,10 +11,7 @@ interface AcceptedDriveDao {
     fun getAll(): LiveData<List<AcceptedDriveEntity>>
 
     @Query("SELECT * FROM acceptedDrives WHERE pooler_uid IN (:poolerUids)")
-    fun loadAllByPoolerUids(poolerUids: List<String>): List<AcceptedDriveEntity>
-
-    @Query("SELECT * FROM acceptedDrives WHERE device_id Like (:deviceId)")
-    fun findByDeviceId(deviceId: String): List<AcceptedDriveEntity>
+    fun loadAllByPoolerUids(poolerUids: List<String>): LiveData<List<AcceptedDriveEntity>>
 
     @Delete
     fun delete(acceptedDriveEntity: AcceptedDriveEntity)

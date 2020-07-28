@@ -9,7 +9,6 @@ data class AcceptedDriveEntity (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id : Int,
-    @ColumnInfo(name = "device_id") val deviceId : String,
     @ColumnInfo(name = "email") val email : String,
     @ColumnInfo(name = "requester_uid") val requesterUid : String,
     @ColumnInfo(name = "pooler_uid") val poolerUid : String,

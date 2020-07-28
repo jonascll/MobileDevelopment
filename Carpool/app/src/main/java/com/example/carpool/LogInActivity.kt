@@ -15,9 +15,9 @@ import java.net.InetAddress
 class LogInActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO : redirect if already logged in
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
-        Log.d("debugging tag" , currentUser?.displayName.toString())
         setContentView(R.layout.activity_login)
 
 
