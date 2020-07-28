@@ -31,7 +31,7 @@
         android:name="com.example.carpool.CityPickerFragment"
         android:id="@+id/cityPickerFragment"
         android:layout_above="@+id/continueToMainMenuButton"
-        android:layout_marginBottom="375dp"
+        android:layout_marginBottom="320dp"
         tools:layout="@layout/fragment_citypicker" />
         <Button
             android:id="@+id/continueToMainMenuButton"

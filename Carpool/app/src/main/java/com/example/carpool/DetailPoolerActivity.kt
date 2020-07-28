@@ -1,8 +1,10 @@
 package com.example.carpool
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.provider.Settings.*
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -65,6 +67,7 @@ class DetailPoolerActivity : AppCompatActivity() {
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}
+    @SuppressLint("HardwareIds")
     fun handleOnAcceptPoolerClick(view: View) {
 
         val driveRequest = RequestedDrive()
@@ -85,7 +88,7 @@ class DetailPoolerActivity : AppCompatActivity() {
         poolerObject.endCity = endCity.toString()
         poolerObject.destinationAddress = destination.toString()
         poolerObject.isSearchingForPooler = true
-        poolerObject.deviceId = Settings.Secure.ANDROID_ID
+        poolerObject.deviceId = Secure.getString(applicationContext.contentResolver, Secure.ANDROID_ID)
         val ref = FirebaseDatabase.getInstance().reference
         ref.child("Users").child(uid.toString()).setValue(poolerObject)
         checkIfRequestHasAlreadyBeenMade(driveRequest) { alreadyExists ->

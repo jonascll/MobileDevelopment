@@ -31,7 +31,7 @@ class LogInActivity : AppCompatActivity() {
             authenticator.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+
                         val intent = Intent(this, CityPickerActivity::class.java)
                         startActivity(intent)
 

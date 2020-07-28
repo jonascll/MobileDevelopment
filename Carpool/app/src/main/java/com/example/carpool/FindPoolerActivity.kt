@@ -25,8 +25,6 @@ class FindPoolerActivity : AppCompatActivity() {
     var startCity : String? = null
     var endCity : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO instead of instanty accepting a pooler by clicking on him make it go to a detail page
-        //TODO make it so you cant see yourself by  hiding the pooler button and maybe showing another button that goes to a accept requests activity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_findpooler)
         endAddress = intent.getStringExtra("endAddress")

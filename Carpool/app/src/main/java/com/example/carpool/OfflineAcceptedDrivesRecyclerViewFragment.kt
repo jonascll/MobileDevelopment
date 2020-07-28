@@ -1,37 +1,37 @@
 package com.example.carpool
 
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_seeofflineaccepteddrives.*
 import kotlinx.android.synthetic.main.fragment_offlineacceptdrivesrecyclerview.*
-import java.lang.Exception
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
 
-class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
-    var acceptedDrives : List<AcceptedDriveEntity>? = null
+class OfflineAcceptedDrivesRecyclerViewFragment() : Fragment() {
+    val executorService : ExecutorService = Executors.newFixedThreadPool(1)
+
+
+    var acceptedDrives : ArrayList<AcceptedDriveEntity> = ArrayList()
     var deviceId : String? = null
-    private var db = null
+    var db : AppDatabase? = null
+    val futures :  ArrayList<Future<*>>  = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Room.databaseBuilder(
-            activity!!.applicationContext,
-            AppDatabase::class.java, "acceptedDrives"
-        ).build()
+        //TODO remove most of your !! calls because this is not the best thing to do in most cases
+        db = Room.databaseBuilder(context!!.applicationContext, AppDatabase::class.java, "acceptedDrivesDb").fallbackToDestructiveMigration().build()
         return inflater.inflate(R.layout.fragment_offlineacceptdrivesrecyclerview,container,false)
     }
 
@@ -47,7 +47,7 @@ class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
             if(it) {
                 recyclerViewInFindOfflineDrives.apply {
                     layoutManager = LinearLayoutManager(activity)
-                    adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives!!)
+                    adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives)
                 }
             }
         }
@@ -68,11 +68,7 @@ class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val pooler : Pooler? = snapshot.getValue(Pooler::class.java)
                     deviceId = pooler?.deviceId
-                    val db = Room.databaseBuilder(
-                        activity!!.applicationContext,
-                        AppDatabase::class.java, "acceptedDrivesDb"
-                    ).build()
-                    acceptedDrives = db.acceptedDriveDao().findByDeviceId(deviceId.toString()).value
+                    getLocalDatabaseDrives()
                     completion(true)
                 }
 
@@ -85,5 +81,22 @@ class OfflineAcceptedDrivesRecyclerViewFragment : Fragment() {
 
 
 
+    }
+
+    fun getLocalDatabaseDrives() {
+        //TODO : fix future being null dont know the cause
+        val runnable = Runnable { acceptedDrives = db?.acceptedDriveDao()?.findByDeviceId(deviceId.toString()) as ArrayList<AcceptedDriveEntity> }
+        val futureGotten : Future<*>? = executorService.submit(runnable)
+        if (futureGotten != null) {
+            futures.add(futureGotten)
+        }
+        for (future : Future<*> in futures) {
+            val gottenDrive = future.get()
+            if(gottenDrive != null) {
+                acceptedDrives.add(gottenDrive as AcceptedDriveEntity)
+            }
+
+
+        }
     }
 }

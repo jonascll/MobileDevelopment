@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -17,11 +18,13 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
     var poolerUid : String? = null
     var requesterUid : String? = null
     var deviceId : String? = null
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO : style layout correctly
+        //TODO Way of getting device id is wrong FIX
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requesteddrivedetail)
-        deviceId = Settings.Secure.ANDROID_ID
+        deviceId =  Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
         email = intent.getStringExtra("email")
         startCity = intent.getStringExtra("startCity")
         startAddress = intent.getStringExtra("startAddress")
@@ -49,7 +52,7 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
     fun handleOnAcceptRequestClick(view: View) {
         val db = Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, "acceptedDrives"
+            AppDatabase::class.java, "acceptedDrivesDb"
         ).build()
         val acceptedDriveEntity = AcceptedDriveEntity(0,
             deviceId.toString(),email.toString(),requesterUid.toString(),poolerUid.toString()
