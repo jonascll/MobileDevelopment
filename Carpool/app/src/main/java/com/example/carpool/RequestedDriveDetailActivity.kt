@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -63,6 +65,8 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
 
     }
 
+
+
     fun putNewAcceptedDrive() {
         val db = Room.databaseBuilder(
             applicationContext,
@@ -72,5 +76,7 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
             email.toString(),requesterUid.toString(),poolerUid.toString()
             ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
         db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
+        val firebaseDb = FirebaseDatabase.getInstance().reference
+        firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDriveEntity)
     }
 }

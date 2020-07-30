@@ -116,23 +116,29 @@ class DetailPoolerActivity : AppCompatActivity() {
         alreadyExists: (Boolean) -> Unit
     ) {
         val ref = FirebaseDatabase.getInstance().reference
-        var exists = false
+        var poolerUidExists = false
+        var requesterUidExists = false
         ref.child("RequestedDrives").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{dataKey ->
                    for(data in dataKey.children){
                        if(data.key == "poolerUid") {
                            Log.d("debugging tag", data.toString())
-                               if(!exists && data.value == request.poolerUid) {
-                                   exists = true
+                               if(!poolerUidExists && data.value == request.poolerUid) {
+                                   poolerUidExists = true
                                }
                            }
+                       if(data.key == "requesterUid") {
+                           if(!requesterUidExists && data.value == request.requesterUid && poolerUidExists){
+                               requesterUidExists = true
+                           }
+                       }
                     }
                 }
-                if(!exists) {
+                if(!requesterUidExists) {
                     alreadyExists(false)
                 }
-                if(exists) {
+                if(requesterUidExists) {
                     alreadyExists(true)
                 }
 
@@ -144,7 +150,7 @@ class DetailPoolerActivity : AppCompatActivity() {
             }
 
           )
-        Log.d("debugging tag", exists.toString())
+        Log.d("debugging tag", requesterUidExists.toString())
 
 
     }
