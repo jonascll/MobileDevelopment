@@ -41,7 +41,7 @@ class CityPickerFragment : Fragment() {
     }
     private fun setCitiesOnSpinner () {
 
-        var authToken : String = ""
+        var authToken : String
         val client = OkHttpClient()
             val request =
                 Request.Builder().url("https://www.universal-tutorial.com/api/getaccesstoken")
@@ -98,7 +98,6 @@ class CityPickerFragment : Fragment() {
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         val spinner = view?.findViewById<Spinner>(R.id.cityPicker)
                         spinner?.adapter = adapter
-                        val framgentActivity = activity
                         if(activity is SignUpAsPoolerActivity) {
                             val signUpActivity = activity as SignUpAsPoolerActivity
                             signUpActivity.setSpinnerValue()

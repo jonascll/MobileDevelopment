@@ -50,6 +50,8 @@ class MainPageActivity : AppCompatActivity() {
                                 buttonFind.visibility = View.INVISIBLE
                                 val buttonRequests: Button = findViewById(R.id.seeRequests)
                                 buttonRequests.visibility = View.VISIBLE
+                                val buttonAcceptedDrives = findViewById<Button>(R.id.seeAcceptedDrives)
+                                buttonAcceptedDrives.visibility = View.VISIBLE
                             }
                         }
 
@@ -79,6 +81,7 @@ class MainPageActivity : AppCompatActivity() {
 
                     override fun onCancelled(error: DatabaseError) {
                         //TODO implement
+
                     }
                 })
 
@@ -90,6 +93,8 @@ class MainPageActivity : AppCompatActivity() {
         val intent = Intent(this, ShowRequestedDrivesActivity::class.java)
         startActivity(intent)
     }
+
+    fun handleSeeAcceptedDrives(view: View) {}
 
 
 }

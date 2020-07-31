@@ -22,4 +22,5 @@
     <string name="see_requests_text">zie verzoeken om te poolen</string>
     <string name="choose_request_text">klik op verzoek dat je wilt bekijken</string>
     <string name="see_requests_offline">Zie de geaccepteerde verzoeken (offline)</string>
+    <string name="see_accepted_drives">Zie de geaccepteerde verzoeken (online)</string>
 </resources>

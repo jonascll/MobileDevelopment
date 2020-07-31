@@ -5,22 +5,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class OfflineAcceptedDriveViewAdapter (private val acceptedDrives : List<AcceptedDriveEntity>) : RecyclerView.Adapter<OfflineAcceptedDriveViewHolder>() {
+class AcceptedDriveRecyclerViewAdapter(private val acceptedDrives : List<AcceptedDriveEntity>) : RecyclerView.Adapter<AcceptedDriveRecyclerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OfflineAcceptedDriveViewHolder {
+    ): AcceptedDriveRecyclerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return OfflineAcceptedDriveViewHolder(inflater, parent)
+        return AcceptedDriveRecyclerViewHolder(inflater, parent)
     }
 
     override fun getItemCount(): Int {
         return acceptedDrives.size
     }
 
-    override fun onBindViewHolder(holder: OfflineAcceptedDriveViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AcceptedDriveRecyclerViewHolder, position: Int) {
         val acceptedDrive : AcceptedDriveEntity = acceptedDrives[position]
         holder.bind(acceptedDrive)
     }
+
 
 }
