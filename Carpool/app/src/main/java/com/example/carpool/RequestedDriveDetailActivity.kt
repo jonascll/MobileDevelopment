@@ -75,8 +75,17 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
         val acceptedDriveEntity = AcceptedDriveEntity(0,
             email.toString(),requesterUid.toString(),poolerUid.toString()
             ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
+        val acceptedDrive = AcceptedDrive()
+        acceptedDrive.destination = destination.toString()
+        acceptedDrive.email = email.toString()
+        acceptedDrive.endCity = endCity.toString()
+        acceptedDrive.id = acceptedDriveEntity.id
+        acceptedDrive.poolerUid = poolerUid.toString()
+        acceptedDrive.requesterUid = requesterUid.toString()
+        acceptedDrive.startAddress = startAddress.toString()
+        acceptedDrive.startCity = startCity.toString()
         db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
         val firebaseDb = FirebaseDatabase.getInstance().reference
-        firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDriveEntity)
+        firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDrive)
     }
 }

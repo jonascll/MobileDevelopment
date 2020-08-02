@@ -94,7 +94,11 @@ class MainPageActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun handleSeeAcceptedDrives(view: View) {}
+    fun handleSeeAcceptedDrives(view: View) {
+        val intent = Intent(this, ShowOnlineAcceptedDriveActivity::class.java)
+        startActivity(intent)
+
+    }
 
 
 }

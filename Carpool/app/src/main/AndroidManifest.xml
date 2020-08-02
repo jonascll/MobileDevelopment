@@ -36,5 +36,6 @@
         <activity android:name=".DetailPoolerActivity"/>
         <activity android:name=".RequestedDriveDetailActivity"/>
         <activity android:name=".SeeOfflineAcceptedDrivesActivity"/>
+        <activity android:name=".ShowOnlineAcceptedDriveActivity"/>
     </application>
 </manifest>

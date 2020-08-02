@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class AcceptedDriveRecyclerViewAdapter(private val acceptedDrives : List<AcceptedDriveEntity>) : RecyclerView.Adapter<AcceptedDriveRecyclerViewHolder>() {
+class AcceptedDriveRecyclerViewAdapter(private val acceptedDrives : List<AcceptedDrive>) : RecyclerView.Adapter<AcceptedDriveRecyclerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -19,7 +19,7 @@ class AcceptedDriveRecyclerViewAdapter(private val acceptedDrives : List<Accepte
     }
 
     override fun onBindViewHolder(holder: AcceptedDriveRecyclerViewHolder, position: Int) {
-        val acceptedDrive : AcceptedDriveEntity = acceptedDrives[position]
+        val acceptedDrive : AcceptedDrive = acceptedDrives[position]
         holder.bind(acceptedDrive)
     }
 

@@ -1,6 +1,7 @@
 package com.example.carpool
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_accepteddriverecyclerview.*
 
 class AcceptedDriveRecyclerViewFragment : Fragment(){
     val currentUser = FirebaseAuth.getInstance().currentUser
-    var acceptedDrives : ArrayList<AcceptedDriveEntity>? = null
+    var acceptedDrives : ArrayList<AcceptedDrive> = ArrayList()
     val dbRef = FirebaseDatabase.getInstance().reference
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,19 +26,18 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
         return inflater.inflate(R.layout.fragment_accepteddriverecyclerview,container,false)
     }
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //TODO : dont forget to change pooler in firebase to make sure they have a device Id
         super.onViewCreated(view, savedInstanceState)
         getAllAcceptedDrivesForPooler {
             if(it) {
                 acceptedDriveRecyclerViewFragment.apply {
                     layoutManager = LinearLayoutManager(activity)
-                    if(acceptedDrives != null) {
-                        adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives!!)
-                    }
-
+                    adapter = AcceptedDriveRecyclerViewAdapter(acceptedDrives!!)
                 }
             } else {
                 // TODO implement good code here
@@ -56,13 +56,15 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
         dbRef.child("AcceptedDrives").addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
-                    val acceptedDrive = it.getValue(AcceptedDriveEntity::class.java)
+                    val acceptedDrive = it.getValue(AcceptedDrive::class.java)
+                    Log.d("debugging tag" , acceptedDrive?.poolerUid.toString())
                     if (acceptedDrive?.poolerUid == currentUser?.uid) {
                         if (acceptedDrive != null) {
-                            acceptedDrives?.add(acceptedDrive)
+                            acceptedDrives.add(acceptedDrive)
                         }
                     }
                 }
+                Log.d("debugging tag", acceptedDrives.toString())
                 completion(true)
             }
 
@@ -72,5 +74,12 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
             }
 
         })
+    }
+
+    fun getListOfGottenDrives() : ArrayList<AcceptedDrive> {
+        return acceptedDrives
+    }
+    companion object {
+        fun newInstance(): AcceptedDriveRecyclerViewFragment = AcceptedDriveRecyclerViewFragment()
     }
 }
