@@ -37,5 +37,6 @@
         <activity android:name=".RequestedDriveDetailActivity"/>
         <activity android:name=".SeeOfflineAcceptedDrivesActivity"/>
         <activity android:name=".ShowOnlineAcceptedDriveActivity"/>
+        <activity android:name=".OnlineAcceptedDriveDetailActivity"/>
     </application>
 </manifest>

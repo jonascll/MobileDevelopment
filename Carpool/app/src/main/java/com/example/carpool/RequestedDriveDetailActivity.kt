@@ -54,7 +54,7 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
 
     fun handleOnDeclineRequestClick(view: View) {}
     fun handleOnAcceptRequestClick(view: View) {
-        //TODO : also put it in the firebase database just so when you log in you can see them for your account only (since if someone else logs in on your device it wont work)
+        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
         val runnable : Runnable = Runnable {
             putNewAcceptedDrive()
         }
