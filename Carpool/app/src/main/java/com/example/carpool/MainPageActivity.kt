@@ -17,6 +17,7 @@ class MainPageActivity : AppCompatActivity() {
     var pickedCityId = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("mainactivity tag", "started this piece of shit")
         val currentUser = authenticator.currentUser
         pickedCityId = intent.getLongExtra("pickedCityId", 0)
         checkIfCurrentUserIsPoolerOrLookingForPoolers()

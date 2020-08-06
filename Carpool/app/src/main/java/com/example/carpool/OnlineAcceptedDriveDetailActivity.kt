@@ -11,6 +11,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
 
@@ -21,9 +23,11 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
     var startCity : String? = null
     var endCity : String? = null
     var destination : String? = null
+    val executorService : ExecutorService = Executors.newFixedThreadPool(1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onlineaccepteddrivedetail)
+
         email = intent.getStringExtra("email")
         requesterUid = intent.getStringExtra("requesterUid")
         poolerUid = intent.getStringExtra("poolerUid")
@@ -48,67 +52,50 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
     }
 
     fun handleEndDriveClick(view: View) {
+
+        val runnable : Runnable = Runnable {
+            handleMethod()
+        }
+        executorService.submit(runnable)
+        val intent = Intent(this, MainPageActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun handleMethod() {
         val dbRefFirebase = FirebaseDatabase.getInstance().reference
-        dbRefFirebase.child("Users").addValueEventListener(object : ValueEventListener {
+        dbRefFirebase.child("Users").addListenerForSingleValueEvent(object : ValueEventListener {
+
+
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.key == requesterUid) {
-                    val pooler = snapshot.getValue(Pooler::class.java)
-                    if(pooler != null) {
-                        pooler.isSearchingForPooler = false
-                        dbRefFirebase.child("Users").child(requesterUid.toString()).setValue(pooler)
+                Log.d("key tag" , snapshot.key.toString())
+
+                    val poolerRequester = snapshot.child(requesterUid.toString()).getValue(Pooler::class.java)
+                    if(poolerRequester != null) {
+                        poolerRequester.isSearchingForPooler = false
+                        dbRefFirebase.child("Users").child(requesterUid.toString()).setValue(poolerRequester)
+                    }
+
+
+
+                    val poolerPooler = snapshot.child(poolerUid.toString()).getValue(Pooler::class.java)
+                    if(poolerPooler != null) {
+                        poolerPooler.isPooler = false
+                        dbRefFirebase.child("Users").child(poolerUid.toString()).setValue(poolerPooler)
                     }
 
                 }
-                if(snapshot.key == poolerUid) {
-                    val pooler = snapshot.getValue(Pooler::class.java)
-                    if(pooler != null) {
-                        pooler.isPooler = false
-                        dbRefFirebase.child("Users").child(poolerUid.toString()).setValue(pooler)
-                    }
 
-                }
-            }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
-        dbRefFirebase.child("AcceptedDrives").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach{ dataKey ->
-                    var poolerUidExists = false
-                    var requesterUidExists = false
-                    for(data in dataKey.children){
-                        if(data.key == "poolerUid") {
-                            Log.d("debugging tag", data.toString())
 
-                            if(!poolerUidExists && data.value == poolerUid) {
-                                poolerUidExists = true
-                            }
-                        }
-                        if(data.key == "requesterUid") {
-                            if(!requesterUidExists && data.value == requesterUid && poolerUidExists){
-                                requesterUidExists = true
-                            }
-                        }
-                    }
-                    if(poolerUidExists && requesterUidExists) {
-                        dbRefFirebase.child("AcceptedDrives").child(snapshot.key.toString()).removeValue()
-                    }
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
         val db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "acceptedDrivesDb"
         ).fallbackToDestructiveMigration().build()
         db.acceptedDriveDao().deleteWithRequestUidAndPoolerUid(requesterUid.toString(), poolerUid.toString())
-        val intent = Intent(this, MainPageActivity::class.java)
-        startActivity(intent)
     }
 
 

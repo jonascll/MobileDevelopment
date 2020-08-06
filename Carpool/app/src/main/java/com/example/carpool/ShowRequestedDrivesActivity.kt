@@ -2,6 +2,7 @@ package com.example.carpool
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,7 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
                 intent.putExtra("poolerUid", poolerUid)
                 intent.putExtra("requesterUid", requesterUid)
                 startActivity(intent)
+                Log.d("start detail tag", "started detail Pog")
             }
         }
     }

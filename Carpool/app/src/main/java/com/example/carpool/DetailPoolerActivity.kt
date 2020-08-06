@@ -67,7 +67,7 @@ class DetailPoolerActivity : AppCompatActivity() {
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}
-
+    //TODO fix firebase multithread or thread or whatever issue
     fun handleOnAcceptPoolerClick(view: View) {
 
         val driveRequest = RequestedDrive()

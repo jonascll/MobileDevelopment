@@ -1,17 +1,23 @@
 package com.example.carpool
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.reflect.typeOf
+
 
 class RequestedDriveDetailActivity : AppCompatActivity(){
     var email : String? = null
@@ -21,11 +27,10 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
     var destination : String? = null
     var poolerUid : String? = null
     var requesterUid : String? = null
-    val executorService : ExecutorService = Executors.newFixedThreadPool(1)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO : style layout correctly
-        //TODO Way of getting device id is wrong FIX
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requesteddrivedetail)
 
@@ -52,40 +57,97 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
         requesterUidField.text = requesterUid
     }
 
-    fun handleOnDeclineRequestClick(view: View) {}
-    fun handleOnAcceptRequestClick(view: View) {
-        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
-        val runnable : Runnable = Runnable {
-            putNewAcceptedDrive()
-        }
-        executorService.submit(runnable)
+    fun handleOnDeclineRequestClick(view: View) {
         val intent = Intent(this, MainPageActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+    fun handleOnAcceptRequestClick(view: View) {
+
+        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
+        removeRequestedDriveFB()
+        val runnable = Runnable {  putNewAcceptedDrive() }
+
+        val thread = Thread(runnable)
+        thread.start()
+        thread.join()
 
 
     }
 
-
-
     fun putNewAcceptedDrive() {
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "acceptedDrivesDb"
-        ).fallbackToDestructiveMigration().build()
-        val acceptedDriveEntity = AcceptedDriveEntity(0,
-            email.toString(),requesterUid.toString(),poolerUid.toString()
-            ,startAddress.toString(), startCity.toString(), endCity.toString(), destination.toString())
         val acceptedDrive = AcceptedDrive()
         acceptedDrive.destination = destination.toString()
         acceptedDrive.email = email.toString()
         acceptedDrive.endCity = endCity.toString()
-        acceptedDrive.id = acceptedDriveEntity.id
+        acceptedDrive.id = 0
         acceptedDrive.poolerUid = poolerUid.toString()
         acceptedDrive.requesterUid = requesterUid.toString()
         acceptedDrive.startAddress = startAddress.toString()
         acceptedDrive.startCity = startCity.toString()
+
+        val db = Room.databaseBuilder(
+            baseContext,
+            AppDatabase::class.java, "acceptedDrivesDb"
+        ).fallbackToDestructiveMigration().build()
+        val acceptedDriveEntity = AcceptedDriveEntity(
+            0,
+            email.toString(),
+            requesterUid.toString(),
+            poolerUid.toString(),
+            startAddress.toString(),
+            startCity.toString(),
+            endCity.toString(),
+            destination.toString()
+        )
         db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
+        val intent = Intent(this, MainPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+        startActivity(intent)
+        finish()
+        }
+
+
+
+//TODO fix issue with firebase multithread shit
+    fun removeRequestedDriveFB() {
+        val acceptedDrive = AcceptedDrive()
+        acceptedDrive.destination = destination.toString()
+        acceptedDrive.email = email.toString()
+        acceptedDrive.endCity = endCity.toString()
+        acceptedDrive.id = 0
+        acceptedDrive.poolerUid = poolerUid.toString()
+        acceptedDrive.requesterUid = requesterUid.toString()
+        acceptedDrive.startAddress = startAddress.toString()
+        acceptedDrive.startCity = startCity.toString()
         val firebaseDb = FirebaseDatabase.getInstance().reference
         firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDrive)
+        firebaseDb.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var poolerUidExists = false
+                var requesterUidExists = false
+
+                snapshot.children.forEach{snapshotChild ->
+                    snapshotChild.children.forEach{
+                        if(it.key == "poolerUid" && !requesterUidExists && !poolerUidExists) {
+                            poolerUidExists = it.value == poolerUid
+                        }
+                        if(it.key == "requesterUid" && poolerUidExists) {
+                            requesterUidExists = it.value == requesterUid
+                        }
+                    }
+                    if(poolerUidExists && requesterUidExists) {
+                        firebaseDb.child("RequestedDrives").child(snapshotChild.key.toString()).removeValue()
+
+
+                    }
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                //TODO good code plx
+            }
+        })
     }
 }
