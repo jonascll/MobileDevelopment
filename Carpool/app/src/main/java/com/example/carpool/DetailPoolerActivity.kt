@@ -67,6 +67,7 @@ class DetailPoolerActivity : AppCompatActivity() {
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}
+
     //TODO fix firebase multithread or thread or whatever issue
     fun handleOnAcceptPoolerClick(view: View) {
 
@@ -95,18 +96,15 @@ class DetailPoolerActivity : AppCompatActivity() {
             if (!alreadyExists) {
                 ref.child("RequestedDrives").child(UUID.randomUUID().toString())
                     .setValue(driveRequest)
-                    .addOnCompleteListener(
-                        OnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                intent = Intent(this, MainPageActivity::class.java)
-                                startActivity(intent)
-                            }
-                            //TODO : write code if it fails
-                        })
+                intent = Intent(this, MainPageActivity::class.java)
+                startActivity(intent)
+
+                //TODO : write code if it fails
             } else {
                 intent = Intent(this, MainPageActivity::class.java)
                 startActivity(intent)
             }
+
         }
     }
 
@@ -118,38 +116,39 @@ class DetailPoolerActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().reference
         var poolerUidExists = false
         var requesterUidExists = false
-        ref.child("RequestedDrives").addValueEventListener(object : ValueEventListener {
+        ref.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach{dataKey ->
-                   for(data in dataKey.children){
-                       if(data.key == "poolerUid") {
-                           Log.d("debugging tag", data.toString())
-                               if(!poolerUidExists && data.value == request.poolerUid) {
-                                   poolerUidExists = true
-                               }
-                           }
-                       if(data.key == "requesterUid") {
-                           if(!requesterUidExists && data.value == request.requesterUid && poolerUidExists){
-                               requesterUidExists = true
-                           }
-                       }
+                snapshot.children.forEach { dataKey ->
+                    for (data in dataKey.children) {
+                        if (data.key == "poolerUid") {
+                            Log.d("debugging tag", data.toString())
+                            if (!poolerUidExists && data.value == request.poolerUid) {
+                                poolerUidExists = true
+                            }
+                        }
+                        if (data.key == "requesterUid") {
+                            if (!requesterUidExists && data.value == request.requesterUid && poolerUidExists) {
+                                requesterUidExists = true
+                            }
+                        }
                     }
                 }
-                if(!requesterUidExists) {
+                if (!requesterUidExists) {
                     alreadyExists(false)
                 }
-                if(requesterUidExists) {
+                if (requesterUidExists) {
                     alreadyExists(true)
                 }
 
             }
+
             override fun onCancelled(error: DatabaseError) {
                 //TODO implement
 
             }
-            }
+        }
 
-          )
+        )
         Log.d("debugging tag", requesterUidExists.toString())
 
 

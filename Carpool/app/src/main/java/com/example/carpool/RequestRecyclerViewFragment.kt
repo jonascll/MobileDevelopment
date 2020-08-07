@@ -30,8 +30,8 @@ class RequestRecyclerViewFragment : Fragment() {
         retainInstance = true
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         getAllReqeustByUid {
             if (it) {
                 requested_drive_recyclerview.apply {

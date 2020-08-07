@@ -45,7 +45,7 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
 
     fun getPoolerUidAndRequesterUid(emailField : TextView, completion : (Boolean) -> Unit) {
         val ref = FirebaseDatabase.getInstance().reference
-        ref.child("RequestedDrives").addValueEventListener(object : ValueEventListener{
+        ref.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     val request : RequestedDrive? = it.getValue(RequestedDrive::class.java)

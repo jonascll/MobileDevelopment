@@ -63,19 +63,6 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
         finish()
     }
     fun handleOnAcceptRequestClick(view: View) {
-
-        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
-        removeRequestedDriveFB()
-        val runnable = Runnable {  putNewAcceptedDrive() }
-
-        val thread = Thread(runnable)
-        thread.start()
-        thread.join()
-
-
-    }
-
-    fun putNewAcceptedDrive() {
         val acceptedDrive = AcceptedDrive()
         acceptedDrive.destination = destination.toString()
         acceptedDrive.email = email.toString()
@@ -100,26 +87,11 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
             endCity.toString(),
             destination.toString()
         )
-        db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity)
-        val intent = Intent(this, MainPageActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-        startActivity(intent)
-        finish()
-        }
+        val runnable = Runnable { db.acceptedDriveDao().insertNewAcceptedDrive(acceptedDriveEntity) }
+        val thread = Thread(runnable)
+        thread.start()
 
-
-
-//TODO fix issue with firebase multithread shit
-    fun removeRequestedDriveFB() {
-        val acceptedDrive = AcceptedDrive()
-        acceptedDrive.destination = destination.toString()
-        acceptedDrive.email = email.toString()
-        acceptedDrive.endCity = endCity.toString()
-        acceptedDrive.id = 0
-        acceptedDrive.poolerUid = poolerUid.toString()
-        acceptedDrive.requesterUid = requesterUid.toString()
-        acceptedDrive.startAddress = startAddress.toString()
-        acceptedDrive.startCity = startCity.toString()
+        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
         val firebaseDb = FirebaseDatabase.getInstance().reference
         firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDrive)
         firebaseDb.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -147,7 +119,12 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
 
             override fun onCancelled(error: DatabaseError) {
                 //TODO good code plx
+                Log.d("error msg", error.message)
             }
         })
-    }
+        val intent = Intent(this, MainPageActivity::class.java)
+        startActivity(intent)
+        finish()
+        }
+
 }

@@ -36,7 +36,7 @@ class FindPoolerActivity : AppCompatActivity() {
 
     fun getChosenPooler(uidText : String, completion : (Boolean) -> Unit) {
 
-        dbReference.child("Users").addValueEventListener(object : ValueEventListener {
+        dbReference.child("Users").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     if(it.key == uidText) {
