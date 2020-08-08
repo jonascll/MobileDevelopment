@@ -1,5 +1,6 @@
 package com.example.carpool
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,11 @@ class RequestRecyclerViewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         getAllReqeustByUid {
             if (it) {
                 requested_drive_recyclerview.apply {
