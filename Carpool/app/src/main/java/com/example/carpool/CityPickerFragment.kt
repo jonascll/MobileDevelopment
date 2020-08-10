@@ -1,37 +1,42 @@
 package com.example.carpool
 
-import android.content.Context
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationListener
 import android.os.Bundle
 import android.os.Handler
-import android.text.Editable
-import android.util.JsonReader
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.google.gson.JsonObject
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import okhttp3.*
-import okhttp3.internal.http2.Header
-import okhttp3.internal.notify
-import okhttp3.internal.wait
-import org.json.JSONObject
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.StringReader
-import java.lang.Exception
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CityPickerFragment : Fragment() {
+
+class CityPickerFragment : Fragment(), LocationListener {
     val cities = ArrayList<String>()
+    var location : Location? = null
+    var cityName : String? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-            setCitiesOnSpinner()
+        setCitiesOnSpinner()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity?.applicationContext!!)
         return inflater.inflate(R.layout.fragment_citypicker,container,false)
     }
 
@@ -60,6 +65,7 @@ class CityPickerFragment : Fragment() {
                     authToken = authToken.replace("\"", "")
                     authToken = authToken.replace("}", "")
                     getAllCitiesInGemeenteVlaamsBrabant(authToken)
+
                 }
             })
     }
@@ -75,6 +81,7 @@ class CityPickerFragment : Fragment() {
                     Log.d("debugging tag", e.message.toString())
 
                 }
+
 
                 override fun onResponse(call: Call, response: Response) {
                     val responsebody = response.body
@@ -108,7 +115,10 @@ class CityPickerFragment : Fragment() {
                         }
                     }
                     mainHandler.post(runnable)
+                    getLocation()
+                    if(location != null) {
 
+                    }
                 }
             })
     }
@@ -116,6 +126,40 @@ class CityPickerFragment : Fragment() {
     fun getSpinner(): Spinner? {
         return view?.findViewById<Spinner>(R.id.cityPicker)
     }
+
+
+   fun getLocation() {
+       if (ActivityCompat.checkSelfPermission(
+               activity!!.applicationContext,
+               Manifest.permission.ACCESS_FINE_LOCATION
+           ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+               activity!!.applicationContext,
+               Manifest.permission.ACCESS_COARSE_LOCATION
+           ) == PackageManager.PERMISSION_GRANTED
+       ) {
+           fusedLocationClient.lastLocation
+               .addOnSuccessListener { location : Location? ->
+                   if(location != null) {
+                       val gcd = Geocoder(context, Locale.getDefault())
+                       val addresses = gcd.getFromLocation(location.latitude, location.longitude, 100)
+                       Log.d("addresses", addresses.toString())
+                   }
+
+               }
+       }
+
+   }
+        //TODO fix location stuff so it gets your location
+    override fun onLocationChanged(p0: Location) {
+        location = p0
+        val gcd = Geocoder(context, Locale.getDefault())
+        val addresses = gcd.getFromLocation(p0.latitude, p0.longitude, 1)
+        Log.d("addresses", addresses.toString())
+        cityName = addresses[0].locality
+    }
+
+
 }
+
 
 

@@ -1,10 +1,16 @@
 package com.example.carpool
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 
 class CityPickerActivity : AppCompatActivity() {
@@ -14,6 +20,8 @@ class CityPickerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
         setContentView(R.layout.activity_citypicker)
+
+
     }
 
     fun handleClickOfContinueButton(view: View) {
@@ -28,6 +36,8 @@ class CityPickerActivity : AppCompatActivity() {
     override fun onBackPressed() {
 
     }
+
+
 
 
 }

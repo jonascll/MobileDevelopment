@@ -1,6 +1,7 @@
 package com.example.carpool
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,18 +9,36 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import java.net.InetAddress
+import android.Manifest
+import android.os.Build
+import androidx.annotation.RequiresApi
 
 
 class LogInActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
+
+
+    override fun onBackPressed() {
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         //TODO : redirect if already logged in
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
         setContentView(R.layout.activity_login)
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ), 1
+            )
+        }
 
     }
     fun handleClickLogIn(view: View) {
@@ -28,24 +47,29 @@ class LogInActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.PasswordInput)
 
 
-            authenticator.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
+        authenticator.signInWithEmailAndPassword(
+            email.text.toString(),
+            password.text.toString()
+        )
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
 
-                        val intent = Intent(this, CityPickerActivity::class.java)
-                        startActivity(intent)
+                    val intent = Intent(this, CityPickerActivity::class.java)
+                    startActivity(intent)
 
-                    } else {
-                        //TODO make a good error message if inputs arent filled or wrong
-                        Toast.makeText(baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
-                    }
-
+                } else {
+                    //TODO make a good error message if inputs arent filled or wrong
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
+            }
 
     }
     fun handleClickSignUp(view: View) {
-        val intent = Intent(this,SignUpActivity::class.java)
+        val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
 
     }
@@ -54,9 +78,4 @@ class LogInActivity : AppCompatActivity() {
         val intent = Intent(this, SeeOfflineAcceptedDrivesActivity::class.java)
         startActivity(intent)
     }
-    override fun onBackPressed() {
-
-    }
-
-
 }
