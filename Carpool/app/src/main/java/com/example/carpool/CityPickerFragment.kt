@@ -23,7 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class CityPickerFragment : Fragment(), LocationListener {
+class CityPickerFragment : Fragment() {
     val cities = ArrayList<String>()
     var location : Location? = null
     var cityName : String? = null
@@ -37,7 +37,6 @@ class CityPickerFragment : Fragment(), LocationListener {
     ): View? {
         setCitiesOnSpinner()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity?.applicationContext!!)
-        getLocation()
         return inflater.inflate(R.layout.fragment_citypicker,container,false)
     }
 
@@ -125,21 +124,6 @@ class CityPickerFragment : Fragment(), LocationListener {
     fun getSpinner(): Spinner? {
         return view?.findViewById<Spinner>(R.id.cityPicker)
     }
-
-   fun getLocation() {
-
-
-   }
-
-    override fun onLocationChanged(p0: Location) {
-        location = p0
-        val gcd = Geocoder(context, Locale.getDefault())
-        val addresses = gcd.getFromLocation(p0.latitude, p0.longitude, 1)
-        Log.d("changed", "changed location")
-        cityName = addresses[0].locality
-    }
-
-
 }
 
 
