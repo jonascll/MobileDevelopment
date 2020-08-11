@@ -37,13 +37,11 @@ class CityPickerFragment : Fragment(), LocationListener {
     ): View? {
         setCitiesOnSpinner()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity?.applicationContext!!)
+        getLocation()
         return inflater.inflate(R.layout.fragment_citypicker,container,false)
     }
 
-    override fun onStart() {
-        super.onStart()
 
-    }
     private fun setCitiesOnSpinner () {
 
         var authToken : String
@@ -110,15 +108,16 @@ class CityPickerFragment : Fragment(), LocationListener {
                             signUpActivity.setSpinnerValue()
                         }
                         if(activity is FindPoolerFormActivity) {
-                            val signUpActivity = activity as FindPoolerFormActivity
-                            signUpActivity.setSpinnerValue()
+                            val findPoolerFormActivity = activity as FindPoolerFormActivity
+                            findPoolerFormActivity.setSpinnerValue()
+                        }
+                        if(activity is CityPickerActivity) {
+                            val cityPickerActivity = activity as CityPickerActivity
+                            cityPickerActivity.setSpinnerValue()
                         }
                     }
                     mainHandler.post(runnable)
-                    getLocation()
-                    if(location != null) {
 
-                    }
                 }
             })
     }
@@ -127,34 +126,16 @@ class CityPickerFragment : Fragment(), LocationListener {
         return view?.findViewById<Spinner>(R.id.cityPicker)
     }
 
-
    fun getLocation() {
-       if (ActivityCompat.checkSelfPermission(
-               activity!!.applicationContext,
-               Manifest.permission.ACCESS_FINE_LOCATION
-           ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-               activity!!.applicationContext,
-               Manifest.permission.ACCESS_COARSE_LOCATION
-           ) == PackageManager.PERMISSION_GRANTED
-       ) {
-           fusedLocationClient.lastLocation
-               .addOnSuccessListener { location : Location? ->
-                   if(location != null) {
-                       val gcd = Geocoder(context, Locale.getDefault())
-                       val addresses = gcd.getFromLocation(location.latitude, location.longitude, 100)
-                       Log.d("addresses", addresses.toString())
-                   }
 
-               }
-       }
 
    }
-        //TODO fix location stuff so it gets your location
+
     override fun onLocationChanged(p0: Location) {
         location = p0
         val gcd = Geocoder(context, Locale.getDefault())
         val addresses = gcd.getFromLocation(p0.latitude, p0.longitude, 1)
-        Log.d("addresses", addresses.toString())
+        Log.d("changed", "changed location")
         cityName = addresses[0].locality
     }
 
