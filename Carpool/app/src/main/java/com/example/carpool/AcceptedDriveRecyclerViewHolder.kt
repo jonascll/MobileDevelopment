@@ -27,12 +27,12 @@ class AcceptedDriveRecyclerViewHolder(inflater: LayoutInflater, parent: ViewGrou
 
     fun bind(acceptedDrive : AcceptedDrive) {
         Log.d("inbinder", acceptedDrive.toString())
-        startAddress?.text = acceptedDrive.startAddress
-        startCity?.text = acceptedDrive.startCity
-        endCity?.text = acceptedDrive.endCity
-        destination?.text = acceptedDrive.destination
-        email?.text = acceptedDrive.email
-        hiddenPoolerUid?.text = acceptedDrive.poolerUid
-        requeserUid?.text = acceptedDrive.requesterUid
+        startAddress?.text = String.format(itemView.resources.getString(R.string.start_address_requested_drive_detail),acceptedDrive.startAddress)
+        startCity?.text = String.format(itemView.resources.getString(R.string.start_city_requested_drive_detail),acceptedDrive.startCity)
+        endCity?.text = String.format(itemView.resources.getString(R.string.end_city_requested_drive_detail),acceptedDrive.endCity)
+        destination?.text = String.format(itemView.resources.getString(R.string.end_address_requested_drive_detail),acceptedDrive.destination)
+        email?.text = String.format(itemView.resources.getString(R.string.email_requested_drive_detail),acceptedDrive.email)
+        hiddenPoolerUid?.text = String.format(itemView.resources.getString(R.string.pooler_uid_request_drive_detail),acceptedDrive.poolerUid)
+        requeserUid?.text = String.format(itemView.resources.getString(R.string.requester_uid_request_drive_detail),acceptedDrive.requesterUid)
     }
 }

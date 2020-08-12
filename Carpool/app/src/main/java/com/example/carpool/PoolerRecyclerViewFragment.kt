@@ -36,7 +36,6 @@ class PoolerRecyclerViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO fix sometimes occuring error (java.lang.NullPointerException: Attempt to invoke virtual method 'void androidx.recyclerview.widget.RecyclerView.setLayoutManager(androidx.recyclerview.widget.RecyclerView$LayoutManager)' on a null object reference)
         getAllPoolersFromSameCity{
             if (it) {
                 recyclerViewInFindPooler.apply {

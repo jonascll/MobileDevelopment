@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.firebase.database.DataSnapshot
@@ -98,7 +99,8 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO good code plx
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         })
         firebaseDb.child("Users").child(requesterUid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
@@ -109,7 +111,8 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO good code plx
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         })
         firebaseDb.child("Users").child(poolerUid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
@@ -120,7 +123,8 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO good code plx
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         })
 

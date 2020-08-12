@@ -20,7 +20,6 @@ class ShowOnlineAcceptedDriveActivity : AppCompatActivity() {
         val endCity = findViewById<TextView>(R.id.endCityOnlineDrive)
         val startAddress = findViewById<TextView>(R.id.startAddressOnlineDrive)
         val destination = findViewById<TextView>(R.id.destinationOnlineDrive)
-        //TODO : pass on these values with the intent and make a drive done that removes is looking for pooler and ispooler and the request
         val intent = Intent(this, OnlineAcceptedDriveDetailActivity::class.java)
         intent.putExtra("email", email.text.toString())
         intent.putExtra("poolerUid", poolerUid.text.toString())

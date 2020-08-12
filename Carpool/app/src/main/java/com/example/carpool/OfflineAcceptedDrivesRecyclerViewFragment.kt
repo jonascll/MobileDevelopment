@@ -31,7 +31,6 @@ class OfflineAcceptedDrivesRecyclerViewFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //TODO remove most of your !! calls because this is not the best thing to do in most cases
         db = Room.databaseBuilder(context!!.applicationContext, AppDatabase::class.java, "acceptedDrivesDb").fallbackToDestructiveMigration().build()
         return inflater.inflate(R.layout.fragment_offlineacceptdrivesrecyclerview,container,false)
     }
@@ -42,7 +41,7 @@ class OfflineAcceptedDrivesRecyclerViewFragment() : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //TODO : dont forget to change pooler in firebase to make sure they have a device Id
+
         super.onViewCreated(view, savedInstanceState)
         getAllLocalAcceptedDrives {
             if(it) {
@@ -50,8 +49,6 @@ class OfflineAcceptedDrivesRecyclerViewFragment() : Fragment() {
                     layoutManager = LinearLayoutManager(activity)
                     adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives)
                 }
-            } else {
-                //TODO : code if it fails
             }
         }
 

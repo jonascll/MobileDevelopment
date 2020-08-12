@@ -8,6 +8,7 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
@@ -55,20 +56,19 @@ class DetailPoolerActivity : AppCompatActivity() {
         val uidField: TextView = findViewById(R.id.detailUid)
         uidField.text = uid
         val detailStartCityField: TextView = findViewById(R.id.detailStartCity)
-        detailStartCityField.text = startCityPooler
+        detailStartCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_start_city_text), startCity)
         val detailStartAddressField: TextView = findViewById(R.id.detailStartAddress)
-        detailStartAddressField.text = startAddressPooler
+        detailStartAddressField.text = String.format(resources.getString(R.string.find_pooler_pooler_start_address_text), startAddress)
         val detailEndCityField: TextView = findViewById(R.id.detailDestinationCity)
-        detailEndCityField.text = endCityPooler
+        detailEndCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_city_text), endCity)
         val detailEndDestinationField: TextView = findViewById(R.id.detailDestination)
-        detailEndDestinationField.text = destinationPooler
+        detailEndDestinationField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_address_text), destination)
         val detailIsPoolerField: TextView = findViewById(R.id.detailIsPooler)
-        detailIsPoolerField.text = isPooler.toString()
+        detailIsPoolerField.text = String.format(resources.getString(R.string.find_pooler_ispooler), isPooler)
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}
 
-    //TODO fix firebase multithread or thread or whatever issue
     fun handleOnAcceptPoolerClick(view: View) {
 
         val driveRequest = RequestedDrive()
@@ -98,8 +98,6 @@ class DetailPoolerActivity : AppCompatActivity() {
                     .setValue(driveRequest)
                 intent = Intent(this, MainPageActivity::class.java)
                 startActivity(intent)
-
-                //TODO : write code if it fails
             } else {
                 intent = Intent(this, MainPageActivity::class.java)
                 startActivity(intent)
@@ -143,13 +141,12 @@ class DetailPoolerActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO implement
-
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         }
 
         )
-        Log.d("debugging tag", requesterUidExists.toString())
 
 
     }

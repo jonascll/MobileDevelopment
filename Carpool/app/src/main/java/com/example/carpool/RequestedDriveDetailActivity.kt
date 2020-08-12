@@ -7,6 +7,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.firebase.database.DataSnapshot
@@ -30,7 +31,6 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO : style layout correctly
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requesteddrivedetail)
 
@@ -48,13 +48,13 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
         val destinationField : TextView = findViewById(R.id.endAddressRequestedDriveDetail)
         val poolerUidField : TextView = findViewById(R.id.poolerUidRequestedDriveDetail)
         val requesterUidField : TextView = findViewById(R.id.requesterUidRequestedDriveDetail)
-        emailField.text = email
-        startCityField.text = startCity
-        startAddressField.text = startAddress
-        endCityField.text = endCity
-        destinationField.text = destination
-        poolerUidField.text = poolerUid
-        requesterUidField.text = requesterUid
+        emailField.text = String.format(resources.getString(R.string.email_requested_drive_detail), email)
+        startCityField.text = String.format(resources.getString(R.string.start_city_requested_drive_detail), startCity)
+        startAddressField.text = String.format(resources.getString(R.string.start_address_requested_drive_detail), startAddress)
+        endCityField.text = String.format(resources.getString(R.string.end_city_requested_drive_detail), endCity)
+        destinationField.text = String.format(resources.getString(R.string.end_address_requested_drive_detail), destination)
+        poolerUidField.text = String.format(resources.getString(R.string.pooler_uid_request_drive_detail), poolerUid)
+        requesterUidField.text = String.format(resources.getString(R.string.requester_uid_request_drive_detail), requesterUid)
     }
 
     fun handleOnDeclineRequestClick(view: View) {
@@ -91,7 +91,6 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
         val thread = Thread(runnable)
         thread.start()
 
-        //TODO : remove from firebaseDatabase when a requested drive becomes a accepted drive
         val firebaseDb = FirebaseDatabase.getInstance().reference
         firebaseDb.child("AcceptedDrives").child(UUID.randomUUID().toString()).setValue(acceptedDrive)
         firebaseDb.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener {
@@ -118,8 +117,8 @@ class RequestedDriveDetailActivity : AppCompatActivity(){
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO good code plx
-                Log.d("error msg", error.message)
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         })
         val intent = Intent(this, MainPageActivity::class.java)

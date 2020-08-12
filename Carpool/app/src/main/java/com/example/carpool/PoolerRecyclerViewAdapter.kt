@@ -16,8 +16,8 @@ class PoolerRecyclerViewAdapter(val poolersFromSameCity: ArrayList<Pooler>?, val
     }
 
     override fun getItemCount(): Int {
-        //TODO: fix size if null
-        return poolersFromSameCity!!.size
+        return poolersFromSameCity?.size ?: 0
+
     }
 
     override fun onBindViewHolder(holder: PoolerViewHolder, position: Int) {

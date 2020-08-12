@@ -28,10 +28,10 @@ class RequestViewHolder(inflater: LayoutInflater, parent: ViewGroup) : RecyclerV
     }
 
     fun bind (request : RequestedDrive) {
-        startAddress?.text = request.startAddress
-        endCity?.text = request.endCity
-        destination?.text = request.destination
-        startCity?.text = request.startCity
-        email?.text = request.email
+        startAddress?.text = String.format(itemView.resources.getString(R.string.start_address_requested_drive_detail),request.startAddress)
+        endCity?.text = String.format(itemView.resources.getString(R.string.end_city_requested_drive_detail),request.endCity)
+        destination?.text = String.format(itemView.resources.getString(R.string.end_address_requested_drive_detail),request.destination)
+        startCity?.text = String.format(itemView.resources.getString(R.string.start_city_requested_drive_detail),request.startCity)
+        email?.text = String.format(itemView.resources.getString(R.string.email_requested_drive_detail),request.email)
     }
 }

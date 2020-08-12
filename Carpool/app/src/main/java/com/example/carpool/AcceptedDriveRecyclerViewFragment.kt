@@ -39,11 +39,7 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
                     layoutManager = LinearLayoutManager(activity)
                     adapter = AcceptedDriveRecyclerViewAdapter(acceptedDrives!!)
                 }
-            } else {
-                // TODO implement good code here
             }
-
-
         }
 
 
@@ -69,7 +65,6 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
             }
 
             override fun onCancelled(error: DatabaseError) {
-                //TODO implement good code here
                 completion(false)
             }
 

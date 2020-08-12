@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-//TODO : fix slow button hiding if you are already signed up as a pooler
 class MainPageActivity : AppCompatActivity() {
     private val authenticator = FirebaseAuth.getInstance()
     private val databaseReference = FirebaseDatabase.getInstance().reference
@@ -81,8 +81,8 @@ class MainPageActivity : AppCompatActivity() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        //TODO implement
-
+                        val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                        toast.show()
                     }
                 })
 

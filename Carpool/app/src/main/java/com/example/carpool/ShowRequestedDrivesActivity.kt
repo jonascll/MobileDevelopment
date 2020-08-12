@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,7 +16,6 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
     var poolerUid : String? = null
     var requesterUid : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO make it so you cant see yourself by  hiding the pooler button and maybe showing another button that goes to a accept requests activity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_showrequesteddrives)
     }
@@ -57,8 +57,8 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
                 completion(true)
             }
             override fun onCancelled(error: DatabaseError) {
-                completion(false)
-                TODO("Not yet implemented")
+                val toast = Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT)
+                toast.show()
             }
         })
     }

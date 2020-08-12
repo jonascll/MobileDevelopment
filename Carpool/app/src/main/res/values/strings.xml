@@ -24,4 +24,13 @@
     <string name="see_requests_offline">Zie de geaccepteerde verzoeken (offline)</string>
     <string name="see_accepted_drives">Zie de geaccepteerde verzoeken (online)</string>
     <string name="finished_drive_text">Rit beëindigen?</string>
+    <string name="email_requested_drive_detail">email van verzoeker : %1$s</string>
+    <string name="start_city_requested_drive_detail">stad waar de rit begint : %1$s</string>
+    <string name="start_address_requested_drive_detail">adres waar de rit begint : %1$s</string>
+    <string name="end_city_requested_drive_detail">stad waar de rit eindigt : %1$s</string>
+    <string name="end_address_requested_drive_detail">adres waar de rit eindigt : %1$s</string>
+    <string name="requester_uid_request_drive_detail">id van de verzoeker : %1$s</string>
+    <string name="pooler_uid_request_drive_detail">id van uzelf : %1$s</string>
+    <string name="find_pooler_pooler_start_address_text">begin adres van pooler : %1$s</string>
+    <string name="find_pooler_ispooler">is een pooler : </string>
 </resources>

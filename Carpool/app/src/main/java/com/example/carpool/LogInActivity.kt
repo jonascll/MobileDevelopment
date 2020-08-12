@@ -26,7 +26,6 @@ class LogInActivity : AppCompatActivity() {
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        //TODO : redirect if already logged in
         super.onCreate(savedInstanceState)
         val currentUser = authenticator.currentUser
         setContentView(R.layout.activity_login)
@@ -39,7 +38,10 @@ class LogInActivity : AppCompatActivity() {
                 ), 1
             )
         }
-
+        if(currentUser != null) {
+            val intent = Intent(this, CityPickerActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun handleClickLogIn(view: View) {
 
@@ -58,7 +60,6 @@ class LogInActivity : AppCompatActivity() {
                     startActivity(intent)
 
                 } else {
-                    //TODO make a good error message if inputs arent filled or wrong
                     Toast.makeText(
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT

@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 class CityPickerActivity : AppCompatActivity() {
-    //TODO : check if user hasnt already become a pooler or is looking for a pooler cause then this is useless
     private val authenticator = FirebaseAuth.getInstance()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {

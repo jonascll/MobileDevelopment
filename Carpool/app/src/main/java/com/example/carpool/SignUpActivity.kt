@@ -30,7 +30,6 @@ class SignUpActivity : AppCompatActivity() {
                 val intent = Intent(this, CityPickerActivity::class.java)
                 startActivity(intent)
             } else {
-                //TODO make a good error message if inputs arent filled or wrong
                 Toast.makeText(baseContext, "Sign up failed.",
                     Toast.LENGTH_SHORT).show()
             }
