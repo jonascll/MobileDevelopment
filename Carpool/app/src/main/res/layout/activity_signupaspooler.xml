@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ecf7f9">
+    android:background="@color/colorPrimary">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,7 +15,7 @@
             android:text="@string/sign_up_as_pooler_start_city_text"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
-            android:textColor="#0f52ba"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="35sp"
             android:textAlignment="center"
             android:gravity="center_horizontal" />
@@ -37,7 +37,7 @@
             android:text="@string/sign_up_as_pooler_end_city_text"
             android:layout_below="@+id/cityPickerSignUpPoolerStartCity"
             android:layout_marginTop="50dp"
-            android:textColor="#0f52ba"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="35sp"
             android:textAlignment="center"
             android:gravity="center_horizontal"/>

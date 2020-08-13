@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ecf7f9">
+    android:background="@color/colorPrimary">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
