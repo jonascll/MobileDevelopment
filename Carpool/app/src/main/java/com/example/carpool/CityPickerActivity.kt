@@ -66,8 +66,6 @@ class CityPickerActivity : AppCompatActivity() {
                         if (adapter != null) {
                             for( i in adapter.count-1 downTo 0 ) {
                                 val value = adapter.getItem(i)
-                                Log.d("value spinner", value.toString())
-                                Log.d("city name", cityName.toString())
                                 if(value == cityName) {
                                     spinner.setSelection(i)
                                     break

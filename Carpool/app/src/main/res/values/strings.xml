@@ -32,5 +32,5 @@
     <string name="requester_uid_request_drive_detail">id van de verzoeker : %1$s</string>
     <string name="pooler_uid_request_drive_detail">id van uzelf : %1$s</string>
     <string name="find_pooler_pooler_start_address_text">begin adres van pooler : %1$s</string>
-    <string name="find_pooler_ispooler">is een pooler : </string>
+    <string name="find_pooler_ispooler">is een pooler : %1$s</string>
 </resources>

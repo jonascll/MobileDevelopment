@@ -28,13 +28,18 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
         val startAddressField : TextView = findViewById(R.id.request_start_address)
         val endCityField : TextView = findViewById(R.id.request_end_city)
         val destinationField : TextView = findViewById(R.id.request_destination)
-        getPoolerUidAndRequesterUid(emailField) {
+        val email = emailField.text.toString().removeRange(0, emailField.text.toString().indexOf(':') + 1).trim()
+        val startCity = startCityField.text.toString().removeRange(0, startCityField.text.toString().indexOf(':') + 1 ).trim()
+        val startAddress = startAddressField.text.toString().removeRange(0, startAddressField.text.toString().indexOf(':') + 1).trim()
+        val endCity = endCityField.text.toString().removeRange(0, endCityField.text.toString().indexOf(':') + 1).trim()
+        val destination = destinationField.text.toString().removeRange(0, destinationField.text.toString().indexOf(':') + 1).trim()
+        getPoolerUidAndRequesterUid(email) {
             if(it) {
-                intent.putExtra("email", emailField.text.toString())
-                intent.putExtra("startCity", startCityField.text.toString())
-                intent.putExtra("startAddress", startAddressField.text.toString())
-                intent.putExtra("endCity", endCityField.text.toString())
-                intent.putExtra("destination", destinationField.text.toString())
+                intent.putExtra("email", email)
+                intent.putExtra("startCity", startCity)
+                intent.putExtra("startAddress", startAddress)
+                intent.putExtra("endCity", endCity)
+                intent.putExtra("destination", destination)
                 intent.putExtra("poolerUid", poolerUid)
                 intent.putExtra("requesterUid", requesterUid)
                 startActivity(intent)
@@ -43,13 +48,13 @@ class ShowRequestedDrivesActivity : AppCompatActivity() {
         }
     }
 
-    fun getPoolerUidAndRequesterUid(emailField : TextView, completion : (Boolean) -> Unit) {
+    fun getPoolerUidAndRequesterUid(email : String, completion : (Boolean) -> Unit) {
         val ref = FirebaseDatabase.getInstance().reference
         ref.child("RequestedDrives").addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     val request : RequestedDrive? = it.getValue(RequestedDrive::class.java)
-                    if(request?.email == emailField.text) {
+                    if(request?.email == email) {
                         poolerUid = request?.poolerUid
                         requesterUid = request?.requesterUid
                     }

@@ -12,7 +12,10 @@
         android:id="@+id/emailRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="50dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +23,9 @@
             android:layout_below="@+id/emailRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +33,9 @@
             android:layout_below="@+id/requesterUidRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +43,9 @@
             android:layout_below="@+id/poolerUidRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +53,9 @@
             android:layout_below="@+id/startCityRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +63,9 @@
             android:layout_below="@+id/startAddressRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +73,9 @@
             android:layout_below="@+id/endCityRequestedDriveDetail"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10dp"/>
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -78,6 +93,7 @@
             android:layout_marginLeft="130dp"
             android:src="@drawable/close"
             android:onClick="handleOnDeclineRequestClick"
-            android:layout_marginStart="130dp" />
+            android:layout_marginStart="130dp"
+            />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

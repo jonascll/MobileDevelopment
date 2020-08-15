@@ -35,7 +35,7 @@ class FindPoolerFormActivity : AppCompatActivity() {
         val endAddress = endAddressfield.text.toString()
         val startAddressField = findViewById<TextView>(R.id.findPoolerStartAdres)
         val startAddress = startAddressField.text.toString()
-        if((endAddress != "") && (startAddress != "")) {
+        if((endAddress == "") && (startAddress == "")) {
             val toast = Toast.makeText(applicationContext, "velden zijn leeg of niet correct", Toast.LENGTH_SHORT)
             toast.show()
         } else {

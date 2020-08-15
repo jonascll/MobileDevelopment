@@ -22,7 +22,7 @@
             android:layout_toLeftOf="@+id/detailUid"
             android:layout_toStartOf="@+id/detailUid"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:textSize="30sp"
@@ -40,52 +40,52 @@
 
 
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/detailStartCity"
             android:layout_below="@+id/detailUid"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:textAlignment="center"
             android:gravity="center_horizontal"/>
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/detailStartAddress"
             android:layout_below="@+id/detailStartCity"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:textAlignment="center"
             android:gravity="center_horizontal"/>
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/detailDestinationCity"
             android:layout_below="@+id/detailStartAddress"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:textAlignment="center"
             android:gravity="center_horizontal"/>
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/detailDestination"
             android:layout_below="@+id/detailDestinationCity"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:textAlignment="center"
             android:gravity="center_horizontal"/>
 
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:id="@+id/detailIsPooler"
             android:layout_below="@+id/detailDestination"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
             android:textAlignment="center"

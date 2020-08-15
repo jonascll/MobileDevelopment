@@ -64,7 +64,16 @@ class DetailPoolerActivity : AppCompatActivity() {
         val detailEndDestinationField: TextView = findViewById(R.id.detailDestination)
         detailEndDestinationField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_address_text), destination)
         val detailIsPoolerField: TextView = findViewById(R.id.detailIsPooler)
-        detailIsPoolerField.text = String.format(resources.getString(R.string.find_pooler_ispooler), isPooler)
+        if(isPooler != null) {
+            if (isPooler!!) {
+                detailIsPoolerField.text = String.format(resources.getString(R.string.find_pooler_ispooler), "ja")
+            } else {
+                detailIsPoolerField.text = String.format(resources.getString(R.string.find_pooler_ispooler), "nee")
+            }
+
+        }
+
+
     }
 
     fun handleOnDeclinePoolerClick(view: View) {}

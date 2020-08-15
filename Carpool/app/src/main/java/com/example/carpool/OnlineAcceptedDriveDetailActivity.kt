@@ -60,17 +60,7 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
             baseContext,
             AppDatabase::class.java, "acceptedDrivesDb"
         ).fallbackToDestructiveMigration().build()
-        val acceptedDriveEntity = AcceptedDriveEntity(
-            0,
-            email.toString(),
-            requesterUid.toString(),
-            poolerUid.toString(),
-            startAddress.toString(),
-            startCity.toString(),
-            endCity.toString(),
-            destination.toString()
-        )
-        val runnable = Runnable { db.acceptedDriveDao().deleteWithRequestUidAndPoolerUid(requesterUid.toString(), poolerUid.toString()) }
+        val runnable = Runnable { db.acceptedDriveDao().deleteWithRequestUidAndPoolerUid(requesterUid.toString().removeRange(0, requesterUid?.indexOf(':')?.plus(1)!!).trim(), poolerUid.toString().removeRange(0, poolerUid?.indexOf(':')?.plus(1)!!).trim()) }
         val thread = Thread(runnable)
         thread.start()
 
@@ -83,10 +73,10 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
                 snapshot.children.forEach{snapshotChild ->
                     snapshotChild.children.forEach{
                         if(it.key == "poolerUid" && !requesterUidExists && !poolerUidExists) {
-                            poolerUidExists = it.value == poolerUid
+                            poolerUidExists = it.value == poolerUid.toString().removeRange(0, poolerUid?.indexOf(':')?.plus(1)!!).trim()
                         }
                         if(it.key == "requesterUid" && poolerUidExists) {
-                            requesterUidExists = it.value == requesterUid
+                            requesterUidExists = it.value == requesterUid.toString().removeRange(0, requesterUid?.indexOf(':')?.plus(1)!!).trim()
                         }
                     }
                     if(poolerUidExists && requesterUidExists) {
@@ -103,11 +93,11 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
                 toast.show()
             }
         })
-        firebaseDb.child("Users").child(requesterUid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
+        firebaseDb.child("Users").child(requesterUid.toString().removeRange(0, requesterUid?.indexOf(':')?.plus(1)!!).trim()).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val requester = snapshot.getValue(Pooler::class.java)
                 requester?.isSearchingForPooler = false
-                firebaseDb.child("Users").child(requesterUid.toString()).setValue(requester)
+                firebaseDb.child("Users").child(requesterUid.toString().toString().removeRange(0, requesterUid?.indexOf(':')?.plus(1)!!).trim()).setValue(requester)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -115,11 +105,11 @@ class OnlineAcceptedDriveDetailActivity : AppCompatActivity() {
                 toast.show()
             }
         })
-        firebaseDb.child("Users").child(poolerUid.toString()).addListenerForSingleValueEvent(object : ValueEventListener{
+        firebaseDb.child("Users").child(poolerUid.toString().removeRange(0, poolerUid?.indexOf(':')?.plus(1)!!).trim()).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val pooler = snapshot.getValue(Pooler::class.java)
                 pooler?.isPooler = false
-                firebaseDb.child("Users").child(poolerUid.toString()).setValue(pooler)
+                firebaseDb.child("Users").child(poolerUid.toString().removeRange(0, poolerUid?.indexOf(':')?.plus(1)!!).trim()).setValue(pooler)
             }
 
             override fun onCancelled(error: DatabaseError) {
