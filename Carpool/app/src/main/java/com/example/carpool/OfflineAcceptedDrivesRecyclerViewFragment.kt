@@ -45,9 +45,11 @@ class OfflineAcceptedDrivesRecyclerViewFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getAllLocalAcceptedDrives {
             if(it) {
-                recyclerViewInFindOfflineDrives.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives)
+                if(recyclerViewInFindOfflineDrives != null) {
+                    recyclerViewInFindOfflineDrives.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = OfflineAcceptedDriveViewAdapter(acceptedDrives)
+                    }
                 }
             }
         }

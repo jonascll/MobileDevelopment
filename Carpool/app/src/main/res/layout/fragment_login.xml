@@ -22,7 +22,8 @@
             android:layout_above="@+id/PasswordInput"
             android:hint="@string/email"
             android:textAlignment="center"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:autofillHints="" />
         <EditText
             android:inputType="textPassword"
             android:id="@+id/PasswordInput"
@@ -33,7 +34,8 @@
             android:layout_above="@+id/LogInButton"
             android:hint="@string/password"
             android:textAlignment="center"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:autofillHints="" />
         <Button
             android:id="@+id/LogInButton"
             android:layout_width="300dp"

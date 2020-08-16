@@ -38,9 +38,11 @@ class PoolerRecyclerViewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getAllPoolersFromSameCity{
             if (it) {
-                recyclerViewInFindPooler.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = PoolerRecyclerViewAdapter(poolerFromSameCity, poolerFoundUid)
+                if(recyclerViewInFindPooler != null) {
+                    recyclerViewInFindPooler.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = PoolerRecyclerViewAdapter(poolerFromSameCity, poolerFoundUid)
+                    }
                 }
             }
 

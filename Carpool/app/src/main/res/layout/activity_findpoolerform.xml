@@ -8,6 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <fragment
+            android:id="@+id/logOutButtonpPoolerForm"
+            android:name="com.example.carpool.LogOutButtonFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="350dp"
+            android:layout_marginLeft="350dp"
+            android:layout_marginTop="-14dp"
+            tools:layout="@layout/fragment_logoutbutton" />
+
         <TextView
         android:id="@+id/findPoolerStartCityText"
         android:layout_width="400dp"

@@ -33,4 +33,6 @@
     <string name="pooler_uid_request_drive_detail">id van uzelf : %1$s</string>
     <string name="find_pooler_pooler_start_address_text">begin adres van pooler : %1$s</string>
     <string name="find_pooler_ispooler">is een pooler : %1$s</string>
+    <string name="top_text_online_drives">klik op een drive om de details te bekijken</string>
+    <string name="top_text_offline_drives">Hier zie je je geaccepteerde drives (offline)</string>
 </resources>

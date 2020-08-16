@@ -7,6 +7,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/logOutButtonOnlineDrives"
+            tools:layout="@layout/fragment_logoutbutton"
+            android:layout_marginTop="-15dp"
+            android:layout_marginLeft="325dp"
+            android:layout_marginStart="325dp"/>
         <TextView
             android:id="@+id/signupPoolerStartCityText"
             android:layout_width="400dp"

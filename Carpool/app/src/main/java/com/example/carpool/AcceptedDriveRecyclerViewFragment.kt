@@ -35,10 +35,13 @@ class AcceptedDriveRecyclerViewFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         getAllAcceptedDrivesForPooler {
             if(it) {
-                acceptedDriveRecyclerViewFragment.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = AcceptedDriveRecyclerViewAdapter(acceptedDrives!!)
+                if(acceptedDriveRecyclerViewFragment != null) {
+                    acceptedDriveRecyclerViewFragment.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = AcceptedDriveRecyclerViewAdapter(acceptedDrives)
+                    }
                 }
+
             }
         }
 

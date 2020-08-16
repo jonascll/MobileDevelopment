@@ -36,13 +36,15 @@ class RequestRecyclerViewFragment : Fragment() {
 
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getAllReqeustByUid {
             if (it) {
-                requested_drive_recyclerview.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = RequestRecyclerViewAdapter(listOfRequest)
+                if(requested_drive_recyclerview != null) {
+                    requested_drive_recyclerview.apply {
+                        layoutManager = LinearLayoutManager(activity)
+                        adapter = RequestRecyclerViewAdapter(listOfRequest)
+                    }
                 }
             }
         }

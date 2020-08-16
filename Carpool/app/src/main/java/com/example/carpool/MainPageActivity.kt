@@ -24,6 +24,11 @@ class MainPageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_mainpage)
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, CityPickerActivity::class.java)
+        startActivity(intent)
+    }
+
     fun handleSignUpPoolerClick(view: View) {
         val intent = Intent(this, SignUpAsPoolerActivity::class.java)
         intent.putExtra("pickedCityId", pickedCityId)
