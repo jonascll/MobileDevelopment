@@ -59,6 +59,7 @@ class FindPoolerActivity : AppCompatActivity() {
     fun handleClickOnFoundPooler(view : View) {
         val uidField : TextView = view.findViewById(R.id.hidden_uid)
         val uidText = uidField.text
+        Log.d("uid text", uidText.toString())
         getChosenPooler(uidText.toString()){
             if(it) {
                 val intent = Intent(this, DetailPoolerActivity::class.java)

@@ -54,15 +54,13 @@ class DetailPoolerActivity : AppCompatActivity() {
 
     fun setValues() {
         val uidField: TextView = findViewById(R.id.detailUid)
-        uidField.text = uid
+        uidField.text = uidPooler
         val detailStartCityField: TextView = findViewById(R.id.detailStartCity)
-        detailStartCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_start_city_text), startCity)
-        val detailStartAddressField: TextView = findViewById(R.id.detailStartAddress)
-        detailStartAddressField.text = String.format(resources.getString(R.string.find_pooler_pooler_start_address_text), startAddress)
+        detailStartCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_start_city_text), startCityPooler)
         val detailEndCityField: TextView = findViewById(R.id.detailDestinationCity)
-        detailEndCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_city_text), endCity)
+        detailEndCityField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_city_text), endCityPooler)
         val detailEndDestinationField: TextView = findViewById(R.id.detailDestination)
-        detailEndDestinationField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_address_text), destination)
+        detailEndDestinationField.text = String.format(resources.getString(R.string.find_pooler_pooler_end_address_text), destinationPooler)
         val detailIsPoolerField: TextView = findViewById(R.id.detailIsPooler)
         if(isPooler != null) {
             if (isPooler!!) {

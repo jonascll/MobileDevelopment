@@ -12,6 +12,7 @@
             android:layout_height="match_parent"
             android:id="@+id/logOutButtonOnlineDrives"
             tools:layout="@layout/fragment_logoutbutton"
+            android:name="com.example.carpool.LogOutButtonFragment"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="315dp"
             android:layout_marginStart="315dp"/>

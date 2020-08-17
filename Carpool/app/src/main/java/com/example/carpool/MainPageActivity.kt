@@ -58,6 +58,16 @@ class MainPageActivity : AppCompatActivity() {
                                 buttonRequests.visibility = View.VISIBLE
                                 val buttonAcceptedDrives = findViewById<Button>(R.id.seeAcceptedDrives)
                                 buttonAcceptedDrives.visibility = View.VISIBLE
+                            } else {
+                                val buttonPooler: Button =
+                                    findViewById<Button>(R.id.signupPoolerButton)
+                                buttonPooler.visibility = View.VISIBLE
+                                val buttonFind: Button = findViewById(R.id.findPoolerButton)
+                                buttonFind.visibility = View.VISIBLE
+                                val buttonRequests: Button = findViewById(R.id.seeRequests)
+                                buttonRequests.visibility = View.INVISIBLE
+                                val buttonAcceptedDrives = findViewById<Button>(R.id.seeAcceptedDrives)
+                                buttonAcceptedDrives.visibility = View.INVISIBLE
                             }
                         }
 
