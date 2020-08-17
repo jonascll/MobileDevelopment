@@ -23,22 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" android:label="@string/app_name">
+        <activity android:name=".SignUpActivity" android:label="@string/app_name" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".CityPickerActivity" android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
+        <activity android:name=".CityPickerActivity" android:label="@string/app_name" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".MainPageActivity"/>
-        <activity android:name=".SignUpAsPoolerActivity"/>
-        <activity android:name=".FindPoolerFormActivity"/>
-        <activity android:name=".FindPoolerActivity"/>
-        <activity android:name=".ShowRequestedDrivesActivity"/>
-        <activity android:name=".DetailPoolerActivity"/>
-        <activity android:name=".RequestedDriveDetailActivity"/>
-        <activity android:name=".SeeOfflineAcceptedDrivesActivity"/>
-        <activity android:name=".ShowOnlineAcceptedDriveActivity"/>
-        <activity android:name=".OnlineAcceptedDriveDetailActivity"/>
+        <activity android:name=".MainPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SignUpAsPoolerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FindPoolerFormActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".FindPoolerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ShowRequestedDrivesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".DetailPoolerActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".RequestedDriveDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SeeOfflineAcceptedDrivesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ShowOnlineAcceptedDriveActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".OnlineAcceptedDriveDetailActivity" android:screenOrientation="portrait"/>
     </application>
 </manifest>
